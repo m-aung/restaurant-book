@@ -1,0 +1,28 @@
+{
+  "name": "fourofus",
+  "description": "A restaurant brochure app with random data from some API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-aung/fourofus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m-aung/fourofus/issues"
+  },
+  "homepage": "https://github.com/m-aung/fourofus#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.6"
+  }
+}
