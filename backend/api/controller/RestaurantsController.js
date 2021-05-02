@@ -11,28 +11,16 @@ export default class RestaurantsController {
     const page = req.query.page ? parseInt(req.query.page, 10) : 0;
 
     // setting up for filters
-    const filters = {}; // default
-    switch (Object.keys(filters).length) {
-      //for cuisine case
-      case req.query.cuisine:
-        {
-          filters.cuisine = req.query.cuisine;
-        }
-        break;
-      // for zipcode case
-      case req.query.zipcode:
-        {
-          filters.zipcode = req.query.zipcode;
-        }
-        break;
-      // for name case
-      case req.query.name:
-        {
-          filters.name = req.query.name;
-        }
-        break;
-      default:
-        break;
+    const filters = {};
+    // cuisine filter
+    if (req.query.cuisine) {
+      filters.cuisine = req.query.cuisine;
+    } else if (req.query.zipcode) {
+      // zipcode filter
+      filters.zipcode = req.query.zipcode;
+    } else if (req.query.name) {
+      // name filter
+      filters.name = req.query.name;
     }
 
     // destructuring
@@ -53,5 +41,31 @@ export default class RestaurantsController {
       totalRestaurants,
     };
     res.json(response);
+  }
+  // get restaurants by id
+  static async getRestaurantById(req, res) {
+    try {
+      const id = req.params.id || {};
+      const restaurant = await RestaurantsDAO.getRestaurantByID(id);
+      if (!restaurant) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+      }
+      res.json(restaurant);
+    } catch (err) {
+      console.log(`api, ${err}`);
+      res.status(500).json({ error: err });
+    }
+  }
+
+  //get all cuisines
+  static async getAllCuisines(_, res) {
+    try {
+      const cuisines = await RestaurantsDAO.getCuisines();
+      res.json(cuisines);
+    } catch (err) {
+      console.log(`api, ${err}`);
+      res.status(500).json({ error: err });
+    }
   }
 }

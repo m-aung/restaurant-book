@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 
 // import from files
 import app from './server.js';
-import restaurantsDAO from './dao/restaurantsDAO.js';
 import RestaurantsDAO from './dao/restaurantsDAO.js';
+import ReviewsDAO from './dao/reviewsDAO.js';
 
 // initializing dotenv
 dotenv.config();
@@ -23,6 +23,7 @@ db.connect(process.env.URL, {
   .then(async (client) => {
     // initial reference
     await RestaurantsDAO.injectDB(client);
+    await ReviewsDAO.injectDB(client);
     app.listen(PORT, () => {
       console.log(`listening on port ${PORT}`);
     });

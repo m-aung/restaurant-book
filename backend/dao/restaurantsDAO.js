@@ -33,29 +33,21 @@ export default class RestaurantsDAO {
     let query;
     // if there is a filter
     // use if (props in object) checking props in object to optimize the loop to search in object/array
-    switch (filters) {
+    if (filters) {
       //for name
-      case 'name' in filters:
-        {
-          // $text refers to text in collections and $seacrch is search operator
-          query = { $text: { $search: filters['name'] } };
-        }
-        break;
+      if ('name' in filters) {
+        // $text refers to text in collections and $seacrch is search operator
+        query = { $text: { $search: filters['name'] } };
+      }
       // for cuisine
-      case 'cuisine' in filters:
-        {
-          // $eq refers to equal operator
-          query = { cuisine: { $eq: filters['cuisine'] } };
-        }
-        break;
+      else if ('cuisine' in filters) {
+        // $eq refers to equal operator
+        query = { cuisine: { $eq: filters['cuisine'] } };
+      }
       //for zipcode
-      case 'zipcode' in filters:
-        {
-          query = { 'address.zipcode': { $eq: filters['zipcode'] } };
-        }
-        break;
-      default:
-        break;
+      else if ('zipcode' in filters) {
+        query = { 'address.zipcode': { $eq: filters['zipcode'] } };
+      }
     }
 
     // getting restaurants data
@@ -85,6 +77,60 @@ export default class RestaurantsDAO {
         `Unable to convert cursor to array or problem counting documents, ${e}`
       );
       return { restaurants: [], totalRestaurants: 0 };
+    }
+  }
+  static async getRestaurantByID(id) {
+    try {
+      const pipeline = [
+        {
+          $match: {
+            _id: new ObjectId(id),
+          },
+        },
+        {
+          $lookup: {
+            from: 'reviews',
+            let: {
+              id: '$_id',
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ['$restaurant_id', '$$id'],
+                  },
+                },
+              },
+              {
+                $sort: {
+                  date: -1,
+                },
+              },
+            ],
+            as: 'reviews',
+          },
+        },
+        {
+          $addFields: {
+            reviews: '$reviews',
+          },
+        },
+      ];
+      return await restaurantsData.aggregate(pipeline).next();
+    } catch (e) {
+      console.error(`Something went wrong in getRestaurantByID: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getCuisines() {
+    let cuisines = [];
+    try {
+      cuisines = await restaurantsData.distinct('cuisine');
+      return cuisines;
+    } catch (e) {
+      console.error(`Unable to get cuisines, ${e}`);
+      return cuisines;
     }
   }
 }
