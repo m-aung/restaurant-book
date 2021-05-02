@@ -1,0 +1,29 @@
+{
+  "name": "restaurant_critics",
+  "main": "./client/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "windows": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve --open\""
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "babel": "^6.23.0",
+    "concurrently": "^6.0.2",
+    "loader": "^2.1.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.13.13",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
