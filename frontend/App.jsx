@@ -12,7 +12,7 @@ import Login from "./components/login";
 function App() {
   // setting initial state using react hooks
   const [user, setUser] = React.useState(null);
-  
+  const [navMenu, setNavMenu] = React.useState('');
   // if user is not logged in set user to null
   async function login(user = null) {
     setUser(user);
@@ -23,21 +23,28 @@ function App() {
     setUser(null)
   }
   
+  const toggleMenu = () => {
+    return navMenu === '' ? setNavMenu('show') : setNavMenu('')
+  }
   return (
     // creating nav-bar
+    
     <div>
-    <nav className="navbar navbar-expand navbar-dark bg-dark">
-    <a href="/restaurants" className="navbar-brand">
-    Restaurant Reviews
+    <nav className="navbar navbar-expand-lg navbar-light bg-primary" >
+    <a className="navbar-brand" href="#">Home
     </a>
-    <div className="navbar-nav mr-auto">
+    <button className="navbar-toggler" type="button" onClick={ toggleMenu}data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon "></span>
+    </button>
+    
+    <div className={"collapse navbar-collapse " + navMenu }id="navbarSupportedContent">
+    <ul className="navbar-nav mr-auto">
     <li className="nav-item">
-    {/* restaurants route */}
     <Link to={"/restaurants"} className="nav-link">
-    Restaurants
+     <span className="sr-only">Restaurants</span>
     </Link>
     </li>
-    <li className="nav-item" >
+    <li className="nav-item">
     { user ? (
       <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
       Logout {user.name}
@@ -48,40 +55,40 @@ function App() {
         Login
         </Link>
         )}
-        
-        </li>
-        </div>
-        </nav>
-        
-        <div className="container mt-3">
-        <Switch>
-          {/* restaurants route */}
-        <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
-        {/* Review route */}
+    </li>
+    </ul>
+    </div>
+    </nav>
+    
+    <div className="container mt-3">
+    <Switch>
+    {/* restaurants route */}
+    <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
+    {/* Review route */}
+    <Route 
+    path="/restaurants/:id/review"
+    render={(props) => (
+      <AddReview {...props} user={user} />
+      )}
+      />
+      {/* restaurants route */}
+      <Route 
+      path="/restaurants/:id"
+      render={(props) => (
+        <Restaurant {...props} user={user} />
+        )}
+        />
+        {/* login route */}
         <Route 
-        path="/restaurants/:id/review"
+        path="/login"
         render={(props) => (
-          <AddReview {...props} user={user} />
+          <Login {...props} login={login} />
           )}
           />
-          {/* restaurants route */}
-          <Route 
-          path="/restaurants/:id"
-          render={(props) => (
-            <Restaurant {...props} user={user} />
-            )}
-            />
-            {/* login route */}
-            <Route 
-            path="/login"
-            render={(props) => (
-              <Login {...props} login={login} />
-              )}
-              />
-              </Switch>
-              </div>
-              </div>
-              );
-            }
-            
-            export default App;
+          </Switch>
+          </div>
+          </div>
+          );
+        }
+        
+        export default App;
