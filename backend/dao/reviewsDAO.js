@@ -16,7 +16,7 @@ export default class ReviewsDAO {
     //else
     try {
       // connect to reviews database
-      reviews = await conn.db(process.env.RESTREVIEWS_NS).collection('reviews');
+      reviews = await conn.db(process.env.DB_NAME).collection('reviews');
     } catch (err) {
       // error handling
       console.error(
