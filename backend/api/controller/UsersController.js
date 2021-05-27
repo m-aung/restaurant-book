@@ -1,9 +1,12 @@
 import UsersDAO from '../../dao/usersDAO.js';
 import jwt from ('jsonwebtoken');
 import bcrypt from ('bcrypt');
+import mongodb from ('mongodb');
 
-const saltRounds = 10;
-const jwtSecret = 'admin-101';
+import UsersDAO from('../../dao/usersDAO.js');
+
+const saltRounds = 12;
+const jwtSecret = 'admin-101'; // hash key
 const  UsersController = {}
 
 
@@ -18,11 +21,24 @@ UsersController.signup = (req, res, next) => {
   //   });
   // }
 
+  try {
+
+    // destruction from request object
+    const {email, password} = req.body;
+   
+    // creating date instance
+    const date = new Date();
+
+    // add review
+    const {userName, _id, token } = await UsersDAO.addUser(email, password, date);
+    //response the status code and sand json obj
+    res.statusCode(200).json({ status: `Welcome ${userName}!` });
+  } catch (err) {
+    // error handling
+    res.status(500).json({ error: 'Username is already used!' });
+  }
   bcrypt.hash(password, saltRounds).then((hash) => {
-    const query = `
-        INSERT INTO users(email, password)
-        VALUES ($1, $2)
-        RETURNING email, id`;
+    const query = mongodb.;
 
     db.query(query, [email, hash]).then((data) => {
       res.locals.user = data.rows[0];

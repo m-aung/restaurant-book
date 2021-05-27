@@ -9,15 +9,34 @@ const Login = props => {
 
   const [user, setUser] = useState(initialUserState);
 
+
   const handleInputChange = event => {
-    const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
+    const { name, value , id} = event.target;
+
+      if(name){
+        setUser({ ...user, [name]: value })
+        console.log('name: ', initialUserState.name)
+      }
+      if(id){
+        setUser({ ...user, [id]: value })
+        console.log('id: ', initialUserState.id)
+      }
+
   };
 
   const login = () => {
-    props.login(user)
+    // props.login(user)
+    // setUser({...user, name: })
+    console.log('name: ',initialUserState.id)
     props.history.push('/');
   }
+
+  useEffect(() => {
+    effect
+    return () => {
+      cleanup
+    }
+  }, [input])
 
   return (
     <div className="submit-form">
