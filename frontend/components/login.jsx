@@ -1,42 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Login = props => {
 
   const initialUserState = {
     name: "",
-    id: "",
+    password: "",
   };
 
   const [user, setUser] = useState(initialUserState);
 
 
   const handleInputChange = event => {
-    const { name, value , id} = event.target;
-
-      if(name){
-        setUser({ ...user, [name]: value })
-        console.log('name: ', initialUserState.name)
-      }
-      if(id){
-        setUser({ ...user, [id]: value })
-        console.log('id: ', initialUserState.id)
-      }
+    const { name, value , password} = event.target;
+    
+    if(name){
+      setUser({ ...user, [name]: value })
+      console.log('name: ', initialUserState.name)
+    }
+    if(password){
+      setUser({ ...user, [password]: value })
+      console.log('id: ', initialUserState.password)
+    }
 
   };
 
   const login = () => {
     // props.login(user)
-    // setUser({...user, name: })
-    console.log('name: ',initialUserState.id)
+    setUser({...user, name: 'test'})
+    console.log('name: ',initialUserState.name)
+    alert('Authentication is currently under-construction!')
     props.history.push('/');
   }
 
   useEffect(() => {
-    effect
-    return () => {
-      cleanup
-    }
-  }, [input])
+    // console.log('user: ', user)
+  }, [user])
 
   return (
     <div className="submit-form">
@@ -55,15 +53,15 @@ const Login = props => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="id">ID</label>
+          <label htmlFor="password">Password</label>
           <input
-            type="text"
+            type="password"
             className="form-control"
-            id="id"
+            id="password"
             required
-            value={user.id}
+            value={user.password}
             onChange={handleInputChange}
-            name="id"
+            name="password"
           />
         </div>
 
