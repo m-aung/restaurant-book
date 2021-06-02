@@ -15,7 +15,7 @@ export default class RestaurantsDAO {
     //connect to the collection of the database
     try {
       restaurantsData = await conn
-        .db(process.env.RESTREVIEWS_NS)
+        .db(process.env.DB_NAME)
         .collection('restaurants');
     } catch (e) {
       console.error(

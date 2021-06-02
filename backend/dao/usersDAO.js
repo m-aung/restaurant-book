@@ -1,51 +1,54 @@
-// import modules
 import mongodb from 'mongodb';
 
-// intializing
-const ObjectId = mongodb.ObjectID;
+let isLoggedIn = false;
 
-let reviews;
-
-export default class ReviewsDAO {
-  // connecting to db
+let users;
+export default class UsersDAO {
   static async injectDB(conn) {
-    // if the review already has data, return
-    if (reviews) {
+    // when the data is already injected
+    if (isLoggedIn) {
       return;
     }
-    //else
+    //connect to the collection of the database
     try {
-      // connect to reviews database
-      reviews = await conn.db(process.env.DB_NAME).collection('reviews');
-    } catch (err) {
-      // error handling
+      userData = await conn.db(process.env.DB_NAME).collection('users');
+      isLoggedIn = true;
+    } catch (e) {
       console.error(
-        `Unable to establish collection handles in reviewsDAO: ${err}`
+        `Unable to establish a collection handle in usersDAO: ${e}`
       );
     }
   }
-
-  // add new review
-  static async addReview(restaurantId, user, review, date) {
+  static async addUser({
+    firstName,
+    lastName,
+    userName,
+    email,
+    password,
+    admin = false,
+    superAdmin = false,
+    date = new Date(),
+  }) {
     try {
       // instantiate user.name, user_id, data, text, restaurant_id
-      const reviewDoc = {
-        name: user.name,
+      const newUser = {
+        username: email,
+        password,
         user_id: user._id,
         date: date,
-        text: review,
+        admin,
+        superAdmin,
+        firstName,
         restaurant_id: ObjectId(restaurantId), // restaurantId = id from req.body
       };
       // insert into review collection
-      return await reviews.insertOne(reviewDoc);
+      return await reviews.insertOne(newUser);
     } catch (err) {
       console.error(`Unable to post review: ${err}`);
       return { error: err };
     }
   }
-
-  // update the review
-  static async updateReview(reviewId, userId, text, date) {
+  static updateReview(reviewId, userId, text, date) {
     try {
       // query to database
       const updateResponse = await reviews.updateOne(
@@ -74,3 +77,5 @@ export default class ReviewsDAO {
     }
   }
 }
+
+// update the review
