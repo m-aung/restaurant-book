@@ -39,12 +39,12 @@ function App() {
     
     <div className={"collapse navbar-collapse " + navMenu }id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
-    <li className="nav-item">
+    <li key={0} className="nav-item">
     <Link to={"/restaurants"} className="nav-link">
      <span className="sr-only">Restaurants</span>
     </Link>
     </li>
-    <li className="nav-item">
+    <li key={1} className="nav-item">
     { user ? (
       <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
       Logout {user.name}
