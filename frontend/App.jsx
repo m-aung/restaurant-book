@@ -1,5 +1,5 @@
 // import modules
-import React from "react";
+import React, {useState} from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
 // import from files
@@ -11,8 +11,8 @@ import Login from "./components/login";
 // functional component App
 function App() {
   // setting initial state using react hooks
-  const [user, setUser] = React.useState(null);
-  const [navMenu, setNavMenu] = React.useState('');
+  const [user, setUser] = useState(null);
+  const [navMenu, setNavMenu] = useState('');
   // fetch user information from database otherwise default is null
   async function login(user = null) {
     setUser(user);

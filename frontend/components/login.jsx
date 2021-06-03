@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
+import login from '../reducers/login';
+import '../action/types.js';
 
-const Login = props => {
-
-  const initialUserState = {
-    name: "",
-    password: "",
+const Login = (props) => {
+  const initialState = {
+    _id: '',
+    username: '',
+    password: '',
+    isLoading: false,
+    error: '',
+    isLoggedIn: false,
   };
 
-  const [user, setUser] = useState(initialUserState);
+  const [user, setUser] = useState(initialState);
 
 
   const handleInputChange = event => {
@@ -15,20 +20,17 @@ const Login = props => {
     
     if(name){
       setUser({ ...user, [name]: value })
-      console.log('name: ', initialUserState.name)
+      console.log('name: ', initialState.name)
     }
     if(password){
       setUser({ ...user, [password]: value })
-      console.log('id: ', initialUserState.password)
+      console.log('id: ', initialState.password)
     }
 
   };
 
   const login = () => {
-    // props.login(user)
-    setUser({...user, name: 'test'})
-    console.log('name: ',initialUserState.name)
-    alert('Authentication is currently under-construction!')
+
     props.history.push('/');
   }
 
@@ -65,7 +67,7 @@ const Login = props => {
           />
         </div>
 
-        <button onClick={login} className="btn btn-success">
+        <button onClick={login} className="button btn btn-success">
           Login
         </button>
       </div>
