@@ -16,6 +16,7 @@ function App() {
   // fetch user information from database otherwise default is null
   async function login(user = null) {
     setUser(user);
+    console.log('user from login function: ', user)
   }
   
   // when logged out set user to null
@@ -31,7 +32,7 @@ function App() {
     
     <div>
     <nav className="navbar navbar-expand-lg navbar-light bg-primary" >
-    <a className="navbar-brand" href="/">Restaurant Book
+    <a className="navbar-brand" href="/">{user ? user.username + '\'s\t' : ''}Restaurant Book 
     </a>
     <button className="navbar-toggler" type="button" onClick={ toggleMenu}data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon "></span>
