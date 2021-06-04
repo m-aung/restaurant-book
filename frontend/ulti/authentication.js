@@ -1,17 +1,7 @@
 const WEBHOOKS =
   'https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/restaurant_book-jpvzf/service/restaurants/incoming_webhook';
 const USERS = {};
-USERS.verifyUsers = async ({ username, password }) => {
-  // testing
-  // return new Promise((resolve, reject) => {
-  //   setTimeout(() => {
-  //     if (username === '1' && password === '2') {
-  //       resolve();
-  //     } else {
-  //       reject();
-  //     }
-  //   }, 3000);
-  // });
+USERS.addUsers = async ({ username, password }) => {
   const data = {
     username,
     password,
@@ -26,7 +16,7 @@ USERS.verifyUsers = async ({ username, password }) => {
     mode: 'cors',
     body: JSON.stringify(data),
   };
-  fetch(`${WEBHOOKS}/users`, option)
+  fetch(`${WEBHOOKS}/verify-user`, option)
     .then((res) => {
       console.log('User Verification completed!');
       return;
@@ -34,5 +24,18 @@ USERS.verifyUsers = async ({ username, password }) => {
     .catch((error) => {
       console.log('from fetch: ', error);
     });
+};
+
+USERS.verifyUser = async () => {
+  // testing
+  // return new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     if (username === '1' && password === '2') {
+  //       resolve();
+  //     } else {
+  //       reject();
+  //     }
+  //   }, 3000);
+  // });
 };
 export default USERS;
