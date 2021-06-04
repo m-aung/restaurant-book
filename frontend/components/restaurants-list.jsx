@@ -33,7 +33,7 @@ const RestaurantsList = props => {
   const retrieveRestaurants = () => {
     RestaurantDataService.getAll()
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setRestaurants(response.data.restaurants);
         
       })
@@ -45,7 +45,7 @@ const RestaurantsList = props => {
   const retrieveCuisines = () => {
     RestaurantDataService.getCuisines()
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setCuisines(["All Cuisines"].concat(response.data));
         
       })
@@ -61,7 +61,7 @@ const RestaurantsList = props => {
   const find = (query, by) => {
     RestaurantDataService.find(query, by)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setRestaurants(response.data.restaurants);
       })
       .catch(e => {
@@ -88,7 +88,7 @@ const RestaurantsList = props => {
   return (
     <div>
       <div className="row pb-1">
-        <div className="input-group col-lg-4">
+        <div key={2} className="input-group col-lg-4">
           <input
             type="text"
             className="form-control"
@@ -106,7 +106,7 @@ const RestaurantsList = props => {
             </button>
           </div>
         </div>
-        <div className="input-group col-lg-4">
+        <div key={3} className="input-group col-lg-4">
           <input
             type="text"
             className="form-control"
@@ -124,8 +124,7 @@ const RestaurantsList = props => {
             </button>
           </div>
         </div>
-        <div className="input-group col-lg-4">
-
+        <div key={4}className="input-group col-lg-4">
           <select onChange={onChangeSearchCuisine}>
              {cuisines.map(cuisine => {
                return (
@@ -146,10 +145,10 @@ const RestaurantsList = props => {
         </div>
       </div>
       <div className="row">
-        {restaurants.map((restaurant) => {
+        {restaurants.map((restaurant, index) => {
           const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
           return (
-            <div className="col-lg-4 pb-1">
+            <div key={index+5} className="col-lg-4 pb-1">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">{restaurant.name}</h5>

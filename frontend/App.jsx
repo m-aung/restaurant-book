@@ -1,5 +1,5 @@
 // import modules
-import React from "react";
+import React, {useState} from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
 // import from files
@@ -11,11 +11,12 @@ import Login from "./components/login";
 // functional component App
 function App() {
   // setting initial state using react hooks
-  const [user, setUser] = React.useState(null);
-  const [navMenu, setNavMenu] = React.useState('');
+  const [user, setUser] = useState(null);
+  const [navMenu, setNavMenu] = useState('');
   // fetch user information from database otherwise default is null
   async function login(user = null) {
     setUser(user);
+    console.log('user from login function: ', user)
   }
   
   // when logged out set user to null
@@ -31,7 +32,7 @@ function App() {
     
     <div>
     <nav className="navbar navbar-expand-lg navbar-light bg-primary" >
-    <a className="navbar-brand" href="/">Restaurant Book
+    <a className="navbar-brand" href="/">{user ? user.username + '\'s\t' : ''}Restaurant Book 
     </a>
     <button className="navbar-toggler" type="button" onClick={ toggleMenu}data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon "></span>
@@ -39,12 +40,12 @@ function App() {
     
     <div className={"collapse navbar-collapse " + navMenu }id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
-    <li className="nav-item">
+    <li key={0} className="nav-item">
     <Link to={"/restaurants"} className="nav-link">
      <span className="sr-only">Restaurants</span>
     </Link>
     </li>
-    <li className="nav-item">
+    <li key={1} className="nav-item">
     { user ? (
       <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
       Logout {user.name}

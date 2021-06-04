@@ -24,6 +24,8 @@ module.exports = {
         options: {
           // attach the presets to the loader (most projects use .babelrc file instead)
           presets: ['@babel/preset-env', '@babel/preset-react'],
+          // for async function
+          plugins: ['@babel/plugin-transform-runtime'],
         },
       },
     ],
