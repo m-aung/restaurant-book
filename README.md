@@ -1,7 +1,6 @@
-# fourofus
+# Restaurant Book
 
-A restaurant brochure app with random data from some API
+Restaurant address, reviews using MERN stacks
+[![website](https://img.shields.io/badge/-Demo-brightgreen)](https://restaurant-book-2021.netlify.app/)
 
-# dao
-
-- data access object
+using serverless with mongoDB realm
