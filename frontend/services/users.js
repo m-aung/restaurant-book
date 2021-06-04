@@ -1,9 +1,9 @@
 import http from '../http-common';
 
 class UserDataServices {
-  verifyUser(user = null) {
-    if (!user) return { error: '401 Bad Request' };
-    return http.post(`/users`, user);
+  verifyUser(data) {
+    if (!data.username || !data.password) return { error: '401 Bad Request' };
+    return http.post(`/verify-user`, data);
   }
 
   find(query, by = 'username', password = 'password') {

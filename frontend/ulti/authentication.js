@@ -5,26 +5,34 @@ USERS.verifyUsers = async ({ username, password }) => {
   const data = {
     username,
     password,
-    admin: false,
+    // admin: false,
   };
   const option = {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
+      // Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     mode: 'cors',
-
     body: JSON.stringify(data),
   };
-  fetch(`${WEBHOOKS}/verify-user`, option)
-    .then((res) => {
-      console.log('User Verification completed!', res);
-      return res.body;
-    })
-    .catch((error) => {
-      console.log('from fetch: ', error);
-    });
+  let response;
+
+  // try {
+  //   response = await fetch(`${WEBHOOKS}/verify-user`, option);
+  //   response = JSON.stringify(response);
+  // } catch (err) {
+  //   console.log('from fetch: ', err);
+  // }
+  fetch(`${WEBHOOKS}/verify-user`, option).then(
+    (res) => {
+      console.log('res: ', JSON.stringify(res));
+    },
+    (err) => {
+      console.log('err: ', err);
+    }
+  );
+  return response;
 };
 
 USERS.addUsers = async () => {

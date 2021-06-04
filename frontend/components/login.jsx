@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import login from '../reducers/login';
-import USERS from '../ulti/authentication'
+import UserDataServices from '../services/users'
 import * as ACTION from '../action/types.js';
 
 function loginReducer(state, action) {
@@ -60,21 +60,14 @@ export default function LoginUseReducer(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     dispatch({ type: 'login' });
-
-    try {
-      await USERS.verifyUsers({ username, password });
-      dispatch({ type: 'success' });
+    UserDataServices.verifyUser({username, password}).then(res => {
+      console.log(res.data)
+      dispatch({ type: 'success' })
       props.login(state)
       props.history.push('/')
-      console.log(state)
-    } catch (error) {
-      dispatch({ type: 'error' },error);
-      console.log(state)
-      console.log('from error: ', error)
-    }
-  };
+      return res.data}).catch(err => dispatch({ type: 'error' },error))
+    };
 
   return (
     <div className='App'>
