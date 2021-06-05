@@ -113,13 +113,18 @@ export default function Signup (props) {
               }
             />
             </div>
-            <div className="form-group">  
-            <input
-              className="input form-control"
-              type='dropdown'
-              placeholder='13 or over'
-              autoComplete='13'
-              value={age}
+            <div className="input form-group">  
+            <DatePicker
+              className="form-control"
+              disableCalender = {true}
+              format='MM-dd-y'
+              // minDate = {new Date()}
+              maxDate = {new Date()}
+              required = {true}
+              clearIcon = {null}
+              closeCalendar = {true}
+              openCalendarOnFocus = {false}
+              value={new Date(1,31,2021)}
               onChange={(e) =>
                 dispatch({
                   type: 'field',
@@ -129,7 +134,7 @@ export default function Signup (props) {
               }
             />
              <input
-                className="input form-control"
+                className="form-control"
                 type='password'
                 placeholder='New Password'
                 autoComplete='new-password'
