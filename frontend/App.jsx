@@ -11,6 +11,9 @@ import Signup from "./components/signup"
 
 // functional component App
 function App() {
+  const props = {
+    key: 0
+  }
   // setting initial state using react hooks
   const [user, setUser] = useState(null);
   const [navMenu, setNavMenu] = useState('');
@@ -41,12 +44,12 @@ function App() {
     
     <div className={"collapse navbar-collapse " + navMenu }id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
-    <li key={0} className="nav-item">
+    <li className="nav-item">
     <Link to={"/restaurants"} className="nav-link">
      <span className="sr-only">Restaurants</span>
     </Link>
     </li>
-    <li key={1} className="nav-item">
+    <li className="nav-item">
     { user ? (
       <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
       Logout {user.name}
@@ -58,7 +61,7 @@ function App() {
         </Link>
         )}
     </li>
-    <li key={2} className="nav-item">
+    <li className="nav-item">
       <Link to={'/signup'} className='nav-link'>
         signup
       </Link>
@@ -70,7 +73,10 @@ function App() {
     <div className="container mt-3">
     <Switch>
     {/* restaurants route */}
-    <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
+    {/* <Route exact path={["/", "/restaurants"]} component={RestaurantsList} /> */}
+    <Route exact path={["/", "/restaurants"]} render={(props) => (
+      <RestaurantsList {...props} />
+      )} />
     {/* Review route render is used to allow props*/}
     <Route 
     path="/restaurants/:id/review"
