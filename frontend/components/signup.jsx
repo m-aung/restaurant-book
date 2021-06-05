@@ -1,9 +1,10 @@
-import React, { useReducer } from "react";
-// import login from '../reducers/login';
+import React, { useState, useEffect, useReducer } from "react";
+// import signup from '../reducers/signup';
 import UserDataServices from '../services/users'
 import * as ACTION from '../action/types.js';
+import DatePicker from 'react-date-picker';
 
-function loginReducer(state, action) {
+function signupReducer(state, action) {
   switch (action.type) {
     case 'field': {
       return {
@@ -11,7 +12,7 @@ function loginReducer(state, action) {
         [action.fieldName]: action.payload,
       };
     }
-    case 'login': {
+    case 'signup': {
       return {
         ...state,
         error: '',
@@ -28,14 +29,14 @@ function loginReducer(state, action) {
     case 'error': {
       return {
         ...state,
-        error: 'Incorrect username or password!',
+        error: action.payload,
         isLoggedIn: false,
         isLoading: false,
         username: '',
         password: '',
       };
     }
-    case 'logOut': {
+    case 'reset': {
       return {
         ...state,
         isLoggedIn: false,
@@ -48,24 +49,28 @@ function loginReducer(state, action) {
 
 const initialState = {
   username: '',
+  email:'',
+  firstName: '',
+  lastName:'',
   password: '',
+  age: '',
   isLoading: false,
   error: '',
   isLoggedIn: false,
 };
 
-export default function Login (props) {
-  const [state, dispatch] = useReducer(loginReducer, initialState);
-  const { username, password, isLoading, error, isLoggedIn } = state;
+export default function Signup (props) {
+  const [state, dispatch] = useReducer(signupReducer, initialState);
+  const { username, password, firstName, lastName, age, isLoading, error, isLoggedIn } = state;
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch({ type: 'login' });
-    UserDataServices.verifyUser({username, password}).then(res => {
+    dispatch({ type: 'signup' });
+    UserDataServices.createUser({username, password}).then(res => {
       console.log(res.data)
       setTimeout(()=>{
         dispatch({ type: 'success' })
-      }, 1550)
+      }, 2050)
       props.login(state)
       props.history.push('/')
       return res.data}).catch(err => dispatch({ type: 'error' },error))
@@ -76,39 +81,67 @@ export default function Login (props) {
       <div className='login-container'>
           <form className='submit-form' onSubmit={onSubmit}>
             {error && <div className="error"><span className='form-control-danger' htmlFor ='input_error'>{error}</span></div>}
-            <p>Please Login!</p>
+            <span>
+              Sign up!<br/>
+              It's easy.
+            </span>
             <div className="form-group">
-            <label htmlFor="user">Username</label>
             <input
               className="input form-control"
               type='text'
-              placeholder='username'
-              value={username}
+              placeholder='First Name'
+              value={firstName}
               onChange={(e) =>
                 dispatch({
                   type: 'field',
-                  fieldName: 'username',
+                  fieldName: 'firstName',
+                  payload: e.currentTarget.value,
+                })
+              }
+            />
+            <input
+              className="input form-control"
+              type='text'
+              placeholder='Last Name'
+              value={lastName}
+              onChange={(e) =>
+                dispatch({
+                  type: 'field',
+                  fieldName: 'lastName',
                   payload: e.currentTarget.value,
                 })
               }
             />
             </div>
-            <div className="input form-group">
-            <label htmlFor="password">Password</label>
+            <div className="form-group">  
             <input
-              className="form-control"
-              type='password'
-              placeholder='password'
-              autoComplete='new-password'
-              value={password}
+              className="input form-control"
+              type='dropdown'
+              placeholder='13 or over'
+              autoComplete='13'
+              value={age}
               onChange={(e) =>
                 dispatch({
                   type: 'field',
-                  fieldName: 'password',
+                  fieldName: 'age',
                   payload: e.currentTarget.value,
                 })
               }
             />
+             <input
+                className="input form-control"
+                type='password'
+                placeholder='New Password'
+                autoComplete='new-password'
+                value={password}
+                onChange={(e) =>
+                  dispatch({
+                    type: 'field',
+                    fieldName: 'password',
+                    payload: e.currentTarget.value,
+                  })
+                }
+              />
             </div>
             <button className="btn btn-success" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}

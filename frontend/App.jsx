@@ -7,6 +7,7 @@ import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants";
 import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
+import Signup from "./components/signup"
 
 // functional component App
 function App() {
@@ -57,6 +58,11 @@ function App() {
         </Link>
         )}
     </li>
+    <li key={2} className="nav-item">
+      <Link to={'/signup'} className='nav-link'>
+        signup
+      </Link>
+      </li>
     </ul>
     </div>
     </nav>
@@ -84,6 +90,12 @@ function App() {
         path="/login"
         render={(props) => (
           <Login {...props} login={login} />
+          )}
+          />
+          <Route 
+        path="/signup"
+        render={(props) => (
+          <Signup {...props} signup={login} />
           )}
           />
           </Switch>

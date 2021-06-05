@@ -6,9 +6,9 @@ class UserDataServices {
     return http.post(`/verify-user`, data);
   }
 
-  find(query, by = 'username', password = 'password') {
-    return http.get(`/users?${by}=${query}&page=${page}`);
-  }
+  // findUser(query, by = 'username', password = 'password') {
+  //   return http.get(`/users?${by}=${query}&page=${page}`);
+  // }
 
   createUser(user, secret = 'noSecret', admin = false) {
     if (admin) {

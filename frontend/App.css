@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.input {
+  margin: auto;
+  width: 40%;
+}
+
+/* .signup-container {
+  margin-left: 40%;
+  transform: translateX(5%);
+} */
