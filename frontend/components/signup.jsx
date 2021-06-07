@@ -37,6 +37,9 @@ export default function Signup (props) {
       // console.log('After error: ', error,'| Loading: ', isLoading)
       return 
     } 
+    else if(!email.includes(`\/[@.]{6,_}/g`)){
+      setState({...state, error: 'Invalid email address.'})
+    }
 
     else if(password && !password.includes(`\ /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,20}$/g`)){// includes special characters and has to have mini length 6 
       setState({...state, isLoading:true, error:`Minimum 6 characters and must include at least one of the following: \n @,#,$,%,^,&,*, 0-9, a-z or A-Z`})
@@ -53,7 +56,7 @@ export default function Signup (props) {
         setTimeout(()=>{
           setState({...state, isLoggedIn: true, isLoading: false,})
         }, 2050)
-        props.login(state)
+        props.login({userId:res.data._id, username})
         props.history.push('/')
         return res.data}).catch(err => dispatch({ type: 'error' },error))
     }
