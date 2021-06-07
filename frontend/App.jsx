@@ -34,9 +34,9 @@ function App() {
   return (
     // creating nav-bar
     
-    <div>
-    <nav className="navbar navbar-expand-lg navbar-light bg-primary" >
-    <a className="navbar-brand" href="/">{user ? user.username + '\'s\t' : ''}Restaurant Book 
+    <div> 
+    <nav className="color navbar navbar-expand-lg navbar-light" >
+    <a className="navbar-brand" href="/">{user ? user.username + '\'s\t' : ''} Restaurant Book 
     </a>
     <button className="navbar-toggler" type="button" onClick={ toggleMenu}data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon "></span>

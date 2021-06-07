@@ -42,6 +42,22 @@
   width: 40%;
 }
 
+.input-login {
+  margin: auto;
+  width: 30%;
+}
+.error {
+  color: red;
+}
+.label {
+  margin-left: -1rem;
+}
+.color {
+  background-color: #e3f2fd;
+}
+.button-color {
+  background-color: #0aaefa;
+}
 /* .signup-container {
   margin-left: 40%;
   transform: translateX(5%);

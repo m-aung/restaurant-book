@@ -62,7 +62,7 @@ export default function Login (props) {
     e.preventDefault();
     dispatch({ type: 'login' });
     UserDataServices.verifyUser({username, password}).then(res => {
-      console.log(res.data)
+      console.log('res.data: ', res.data)
       setTimeout(()=>{
         dispatch({ type: 'success' })
       }, 1550)
@@ -78,9 +78,8 @@ export default function Login (props) {
             {error && <div className="error"><span className='form-control-danger' htmlFor ='input_error'>{error}</span></div>}
             <p>Please Login!</p>
             <div className="form-group">
-            <label htmlFor="user">Username</label>
             <input
-              className="input form-control"
+              className="input-login form-control"
               type='text'
               placeholder='username'
               value={username}
@@ -93,8 +92,7 @@ export default function Login (props) {
               }
             />
             </div>
-            <div className="input form-group">
-            <label htmlFor="password">Password</label>
+            <div className="input-login form-group">
             <input
               className="form-control"
               type='password'
