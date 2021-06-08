@@ -28,6 +28,7 @@ export default function Signup (props) {
   const onSubmit = async (e) => {
     e.preventDefault(); // preventing multiple clicking
     console.log('when submit: ',state)
+    const regx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
     if(!username || !password || !age || !firstName || !lastName || !email || robort){
       setState({...state, isLoading:true, error: 'Please fill up all fields'}) // setting up loading state and error
       setTimeout(()=> {
@@ -37,11 +38,10 @@ export default function Signup (props) {
       // console.log('After error: ', error,'| Loading: ', isLoading)
       return 
     } 
-    else if(!email.includes(`\/[@.]{6,_}/g`)){
-      setState({...state, error: 'Invalid email address.'})
-    }
-
-    else if(password && !password.includes(`\ /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,20}$/g`)){// includes special characters and has to have mini length 6 
+    // else if(!email.includes(`\/^[@.]{6,}$/g`)){
+    //   setState({...state, error: 'Invalid email address.'})
+    // }
+    else if(!regx.test(password)){// includes special characters and has to have mini length 6   
       setState({...state, isLoading:true, error:`Minimum 6 characters and must include at least one of the following: \n @,#,$,%,^,&,*, 0-9, a-z or A-Z`})
       setTimeout(()=> {
         setState({...state, isLoading:false})
@@ -53,12 +53,13 @@ export default function Signup (props) {
       setState({ ...state, error: '', isLoading: true});
       UserDataServices.createUser(state).then(res => {
         console.log(res.data)
-        setTimeout(()=>{
-          setState({...state, isLoggedIn: true, isLoading: false,})
-        }, 2050)
+        setState({...state, isLoggedIn: true, isLoading: false,})
         props.login({userId:res.data._id, username})
         props.history.push('/')
-        return res.data}).catch(err => dispatch({ type: 'error' },error))
+        return res.data}).catch(err => {
+          console.log('Error: ', err)
+          setState({...state, 'error':'Something wrong with connection issue. Please try again later.'})
+        })
     }
     };
 
@@ -75,7 +76,7 @@ export default function Signup (props) {
 
   return (
     <div className='App'>
-          <form className='card p-3 text-right' onSubmit={onSubmit}>
+          <form className='card p-3 text-right login-container' onSubmit={onSubmit}>
             <span>  
               Sign up!<br/>
               It's easy.

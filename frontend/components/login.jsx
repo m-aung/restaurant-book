@@ -2,8 +2,10 @@ import React, { useReducer } from "react";
 // import login from '../reducers/login';
 import UserDataServices from '../services/users'
 import * as ACTION from '../action/types.js';
+import { BrowserHistory} from 'react-router';
 
 function loginReducer(state, action) {
+  
   switch (action.type) {
     case 'field': {
       return {
@@ -55,9 +57,20 @@ const initialState = {
 };
 
 export default function Login (props) {
+  const history = new BrowserHistory()
+  // props.updatePath('/login')
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const { username, password, isLoading, error, isLoggedIn } = state;
-
+  const reloadPage = async (e)=> {
+    e.preventDefault();
+    console.log('from login history: ',history)
+    props.history.push('/')
+    // history.go(0)
+    // const curURI = document.baseURI
+    // const documentURI = document.documentURI
+    // console.log(curURI, 'and: ', documentURI)
+    // location.replace(curURI);
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: 'login' });
@@ -66,16 +79,16 @@ export default function Login (props) {
       setTimeout(()=>{
         dispatch({ type: 'success' })
       }, 1550)
-      props.login(state)
+      props.login({userId:res.data._id})
       props.history.push('/')
       return res.data}).catch(err => dispatch({ type: 'error' },error))
     };
 
   return (
     <div className='App'>
-      <div className='login-container'>
+      <div className='card p-3 text-right login-container'>
           <form className='submit-form' onSubmit={onSubmit}>
-            {error && <div className="error"><span className='form-control-danger' htmlFor ='input_error'>{error}</span></div>}
+            {error && <div className="error"><span className='alert alert-danger' htmlFor ='input_error'>{error}</span></div>}
             <p>Please Login!</p>
             <div className="form-group">
             <input
@@ -108,9 +121,10 @@ export default function Login (props) {
               }
             />
             </div>
-            <button className="btn btn-success" type='submit' disabled={isLoading}>
+            <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
+            <input className="btn" type="button" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
           </form>
       </div>
     </div>

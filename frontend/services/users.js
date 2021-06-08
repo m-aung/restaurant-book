@@ -13,9 +13,9 @@ class UserDataServices {
   createUser(user, secret = 'noSecret', admin = false) {
     if (admin) {
       user.admin = admin;
-      user.secret = secret;
+      // user.secret = secret;
     }
-    return http.post('/newUser', user);
+    return http.post('/new-user', user);
   }
 
   updateUser(data) {

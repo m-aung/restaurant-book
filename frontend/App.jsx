@@ -11,41 +11,68 @@ import Signup from "./components/signup"
 
 // functional component App
 function App() {
-  const props = {
-    key: 0
-  }
+  
+  // const history = new BrowserHistory
+  // const history = useHistory()
+  // console.log(history)
   // setting initial state using react hooks
+  const [path,setPath] = useState('/')
   const [user, setUser] = useState(null);
   const [navMenu, setNavMenu] = useState('');
   // fetch user information from database otherwise default is null
-  async function login(user = null) {
+  const login = async(user = null) => {
     setUser(user);
     console.log('user from login function: ', user)
   }
   
   // when logged out set user to null
-  async function logout() {
+  const logout = async ()=> {
     setUser(null)
   }
+
   
   const toggleMenu = () => {
     return navMenu === '' ? setNavMenu('show') : setNavMenu('')
   }
+
+  const updatePath = async (current='/')=> {
+    setPath(current)
+  }
+
+
+  // const BackButton = ({ match, destination }) => {
+    
+  //   if (match.path === '/') {
+  //       parentPath = `/${destination}`;
+  //   } else {
+  //       const arr = match.path.split('/');
+  //       const currPage = arr[arr.length - 1];
+  //       parentPath = arr
+  //           .filter((item) => {
+  //               return item !== currPage;
+  //           })
+  //           .join('/');
+  //   }
+  // }
+
   return (
     // creating nav-bar
     
     <div> 
-    <nav className="color navbar navbar-expand-lg navbar-light" >
-    <a className="navbar-brand" href="/">{user ? user.username + '\'s\t' : ''} Restaurant Book 
+    <a className="navbar color title" href="/">{user ? user.username + '\'s\t' : ''} Restaurant Book 
     </a>
+    <nav className="color navbar navbar-expand-lg navbar-light" >
     <button className="navbar-toggler" type="button" onClick={ toggleMenu}data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon "></span>
     </button>
     
     <div className={"collapse navbar-collapse " + navMenu }id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
+      <li className="nav-item">
+    <Link className="nav-link" to={{pathname:path, state: { fromDashboard: true }}} activeopacity={0.8}>{'Back'}</Link>
+    </li>
     <li className="nav-item">
-    <Link to={"/restaurants"} className="nav-link">
+    <Link to={"/restaurants"} className="nav-link" activeopacity={0.8}>
      <span className="sr-only">Restaurants</span>
     </Link>
     </li>
@@ -56,13 +83,13 @@ function App() {
       </a>
       ) : (      
         // login route
-        <Link to={"/login"} className="nav-link">
+        <Link to={"/login"} className="nav-link" activeopacity={0.8}>
         Login
         </Link>
         )}
     </li>
     <li className="nav-item">
-      <Link to={'/signup'} className='nav-link'>
+      <Link to={'/signup'} className='nav-link' activeopacity={0.8}>
         signup
       </Link>
       </li>
@@ -71,13 +98,11 @@ function App() {
     </nav>
     
     <div className="container mt-3">
+    
     <Switch>
-    {/* restaurants route */}
-    {/* <Route exact path={["/", "/restaurants"]} component={RestaurantsList} /> */}
     <Route exact path={["/", "/restaurants"]} render={(props) => (
       <RestaurantsList {...props} />
       )} />
-    {/* Review route render is used to allow props*/}
     <Route 
     path="/restaurants/:id/review"
     render={(props) => (
@@ -88,16 +113,15 @@ function App() {
       <Route 
       path="/restaurants/:id"
       render={(props) => (
-        <Restaurant {...props} user={user} />
+        <Restaurant {...props} user={user}/>
         )}
         />
         {/* login route */}
         <Route 
         path="/login"
         render={(props) => (
-          <Login {...props} login={login} />
-          )}
-          />
+          <Login {...props} login={login}/>
+          )} />
           <Route 
         path="/signup"
         render={(props) => (
@@ -105,9 +129,8 @@ function App() {
           )}
           />
           </Switch>
+
           </div>
-          </div>
-          );
-        }
-        
+          </div>        
+  )}
         export default App;
