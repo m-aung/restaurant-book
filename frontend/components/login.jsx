@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useReducer } from "react";
-import login from '../reducers/login';
+// import login from '../reducers/login';
 import UserDataServices from '../services/users'
 import * as ACTION from '../action/types.js';
 
 function loginReducer(state, action) {
+  
   switch (action.type) {
     case 'field': {
       return {
@@ -41,6 +42,9 @@ function loginReducer(state, action) {
         isLoggedIn: false,
       };
     }
+    case 'refresh':{
+      return initialState
+    }
     default:
       return state;
   }
@@ -54,31 +58,53 @@ const initialState = {
   isLoggedIn: false,
 };
 
-export default function LoginUseReducer(props) {
+export default function Login (props) {
+  const [clear,setClear] = useState(false)
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const { username, password, isLoading, error, isLoggedIn } = state;
+  useEffect(() => {
+    dispatch({ type: 'refresh' });
+    return () =>{
+      setClear(false)
+    }
+  }, [clear])
 
+  const reloadPage = async (e)=> {
+    e.preventDefault();
+    // console.log('from login history: ',history)
+    props.history.push({pathname:'/login',state:{ fromDashboard: true }})
+    // props.refresh(initialState)
+    setClear(true)
+    console.log('state: ',state)
+    console.log(props.history)
+    // history.go(0)
+    // const curURI = document.baseURI
+    // const documentURI = document.documentURI
+    // console.log(curURI, 'and: ', documentURI)
+    // location.replace(curURI);
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: 'login' });
     UserDataServices.verifyUser({username, password}).then(res => {
-      console.log(res.data)
-      dispatch({ type: 'success' })
-      props.login(state)
+      console.log('res.data: ', res.data)
+      setTimeout(()=>{
+        dispatch({ type: 'success' })
+      }, 1550)
+      props.login({userId:res.data._id})
       props.history.push('/')
       return res.data}).catch(err => dispatch({ type: 'error' },error))
     };
 
   return (
     <div className='App'>
-      <div className='login-container'>
+      <div className='card p-3 text-right login-container'>
           <form className='submit-form' onSubmit={onSubmit}>
-            {error && <div className="error"><span className='form-control-danger' htmlFor ='input_error'>{error}</span></div>}
+            {error && <div className="error"><span className='alert alert-danger' htmlFor ='input_error'>{error}</span></div>}
             <p>Please Login!</p>
             <div className="form-group">
-            <label htmlFor="user">Username</label>
             <input
-              className="form-control"
+              className="input-login form-control"
               type='text'
               placeholder='username'
               value={username}
@@ -91,8 +117,7 @@ export default function LoginUseReducer(props) {
               }
             />
             </div>
-            <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <div className="input-login form-group">
             <input
               className="form-control"
               type='password'
@@ -108,9 +133,10 @@ export default function LoginUseReducer(props) {
               }
             />
             </div>
-            <button className="btn btn-success" type='submit' disabled={isLoading}>
+            <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
+            <input className="pointer btn"  type="submit" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
           </form>
       </div>
     </div>

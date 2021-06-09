@@ -4,7 +4,16 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter
+    // basename={'/'}
+    forceRefresh={false}
+    getUserConfirmation={(message, callback) => {
+      // this is the default behavior
+      const allowTransition = window.confirm(message);
+      callback(allowTransition);
+    }}
+    // keyLength={optionalNumber}
+  >
     <App />
   </BrowserRouter>,
   document.getElementById('root')

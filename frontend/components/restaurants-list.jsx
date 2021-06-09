@@ -88,7 +88,7 @@ const RestaurantsList = props => {
   return (
     <div>
       <div className="row pb-1">
-        <div key={2} className="input-group col-lg-4">
+        <div className="input-group col-lg-4">
           <input
             type="text"
             className="form-control"
@@ -106,7 +106,7 @@ const RestaurantsList = props => {
             </button>
           </div>
         </div>
-        <div key={3} className="input-group col-lg-4">
+        <div className="input-group col-lg-4">
           <input
             type="text"
             className="form-control"
@@ -124,7 +124,7 @@ const RestaurantsList = props => {
             </button>
           </div>
         </div>
-        <div key={4}className="input-group col-lg-4">
+        <div className="input-group col-lg-4">
           <select onChange={onChangeSearchCuisine}>
              {cuisines.map(cuisine => {
                return (
@@ -148,7 +148,7 @@ const RestaurantsList = props => {
         {restaurants.map((restaurant, index) => {
           const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
           return (
-            <div key={index+5} className="col-lg-4 pb-1">
+            <div key={index} className="col-lg-4 pb-1">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">{restaurant.name}</h5>

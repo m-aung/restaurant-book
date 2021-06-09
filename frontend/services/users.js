@@ -6,16 +6,16 @@ class UserDataServices {
     return http.post(`/verify-user`, data);
   }
 
-  find(query, by = 'username', password = 'password') {
-    return http.get(`/users?${by}=${query}&page=${page}`);
-  }
+  // findUser(query, by = 'username', password = 'password') {
+  //   return http.get(`/users?${by}=${query}&page=${page}`);
+  // }
 
   createUser(user, secret = 'noSecret', admin = false) {
     if (admin) {
       user.admin = admin;
-      user.secret = secret;
+      // user.secret = secret;
     }
-    return http.post('/newUser', user);
+    return http.post('/new-user', user);
   }
 
   updateUser(data) {
