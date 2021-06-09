@@ -35,7 +35,7 @@ function loginReducer(state, action) {
         isLoading: false,
         username: '',
         password: '',
-        errorCount: state.errorCount+1,
+        errorCount: state.errorCount + action.count,
       };
     }
     case 'logOut': {
@@ -94,11 +94,11 @@ export default function Login (props) {
       setTimeout(()=>{
         dispatch({ type: 'refresh'} )
       }, 30000)
-      return dispatch({ type: 'error', payload: 'Try again in 5 minutes' })
+      return dispatch({ type: 'error', count: 1, payload: 'Try again in 5 minutes' })
     }
     if(!username || !password ) {
       setTimeout(()=>{
-        dispatch({ type: 'error', payload: 'Please fill all the fields!' } )
+        dispatch({ type: 'error', count: 0, payload: 'Please fill all the fields!' } )
       }, 50)
     }
     else {
@@ -106,7 +106,7 @@ export default function Login (props) {
       // console.log('res.data: ', res.data)
       if(!res.data) {
         setTimeout(()=>{
-          dispatch({ type: 'error', payload: res.data.error })
+          dispatch({ type: 'error', count: 1, payload: res.data.error })
         }, 1550)
       }
       else {setTimeout(()=>{
@@ -114,7 +114,7 @@ export default function Login (props) {
       }, 1550)
       props.login({userId:res.data._id})
       props.history.push('/')}
-      return res.data}).catch(err => dispatch({ type: 'error', payload:'Connection Error. Try again later.'}))}
+      return res.data}).catch(err => dispatch({ type: 'error', count: 1, payload:'Connection Error. Try again later.'}))}
     };
 
   return (
