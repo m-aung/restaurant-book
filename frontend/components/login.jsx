@@ -119,7 +119,7 @@ export default function Login (props) {
 
   return (
     <div className='App'>
-      <div className='card p-5 text-right login-container'>
+      <div className='card p-2 text-right login-container'>
       {state.error && <div className="alert alert-danger"><span className='form-control-danger' htmlFor ='input_error'>{state.error}</span></div>}
           <form className='submit-form' onSubmit={onSubmit}>
             <p>Please Login!</p>

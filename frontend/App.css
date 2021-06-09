@@ -38,13 +38,13 @@
 }
 
 .input {
+  width: 40%;
   margin: auto;
-  /* width: 40%; */
 }
 
 .input-login {
+  width: 40%;
   margin: auto;
-  /* width: 30%; */
 }
 .error {
   color: red;
@@ -68,7 +68,7 @@
   white-space: nowrap;
 }
 .login-container {
-  width: 40%;
+  width: 30%;
   margin: 0;
   position: absolute;
   top: 50%;
@@ -84,6 +84,7 @@
   transform: translate(-5%);
 }
 #age {
+  position: absolute;
   position: flex;
   float: left;
   left: 5%;
@@ -91,13 +92,13 @@
 
 a {
   color: rgba(0, 0, 0, 0.55);
-} /* Unvisited link  */
+}
 a:visited {
   color: rgba(0, 0, 0, 0.55);
-} /* Visited link    */
+}
 a:hover {
   color: rgba(0, 0, 0, 0.55);
-} /* Mouse over link */
+}
 a:active {
   color: rgba(0, 0, 0, 0.55);
-} /* Selected link   */
+}
