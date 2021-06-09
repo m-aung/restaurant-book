@@ -55,7 +55,7 @@ export default function Signup (props) {
       UserDataServices.createUser(state).then(res => {
         console.log(res.data)
         setState({...state, isLoggedIn: true, isLoading: false,})
-        props.login({userId:res.data._id, username})
+        props.signup({userId:res.data._id, username})
         props.history.push('/')
         return res.data}).catch(err => {
           console.log('Error: ', err)
@@ -100,7 +100,6 @@ export default function Signup (props) {
             </span>
             {error && <div className="alert alert-danger"><span className='form-control-danger' htmlFor ='input_error'>{error}</span></div>}
             <div className="form-group">
-              <div className="input-group-prepend">
             <input
               className="input form-control"
               type='text'
@@ -127,7 +126,7 @@ export default function Signup (props) {
                 })
               }
             />
-            </div>
+
             <input
               className="input form-control"
               type='text'
@@ -155,8 +154,6 @@ export default function Signup (props) {
                 })
               }
             />
-            <Dropdown className="input btn btn-light dropdown" options={options} onChange={(e)=>{setState({...state, age:e['value'] })
-          console.log(state.age)}} placeholder="Select an option" />
              <input
                 className="input form-control"
                 type='password'
@@ -170,14 +167,19 @@ export default function Signup (props) {
                   })
                 }
               />
-            <div className="input form-check">
-              <input type="checkbox" className="form-check-input" id="exampleCheck1" onClick={(e)=> {setState({...state, robort:false,})}}/>
-              <label className="label form-check-label" htmlFor="exampleCheck1">click here to verify</label>
+            <div className="container m-3"> 
+            <Dropdown className="text-right btn btn-light dropdown" id="age" options={options} onChange={(e)=>{setState({...state, age:e['value'] })}} placeholder="Select an option" />
             </div>
+            <div className="container m-3">
+              <input type="checkbox" className="form-check-input" id="robort-check" onClick={(e)=> {setState({...state, robort:false,})}}/>
+              <label className="label form-check-label" htmlFor="robort-check">click here to verify</label>
+            </div>
+            <div className="container m-3">
             <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
             <input className="pointer btn" type="button" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
+            </div>
             </div>
           </form>
     </div>)}

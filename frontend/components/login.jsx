@@ -10,6 +10,7 @@ function loginReducer(state, action) {
       return {
         ...state,
         [action.fieldName]: action.payload,
+        error:'',
       };
     }
     case 'login': {
@@ -29,11 +30,12 @@ function loginReducer(state, action) {
     case 'error': {
       return {
         ...state,
-        error: 'Incorrect username or password!',
+        error: action.payload,
         isLoggedIn: false,
         isLoading: false,
         username: '',
         password: '',
+        errorCount: state.errorCount+1,
       };
     }
     case 'logOut': {
@@ -56,13 +58,14 @@ const initialState = {
   isLoading: false,
   error: '',
   isLoggedIn: false,
+  errorCount: 0,
 };
 
 export default function Login (props) {
   const [clear,setClear] = useState(false)
   const [state, dispatch] = useReducer(loginReducer, initialState);
-  const { username, password, isLoading, error, isLoggedIn } = state;
-  useEffect(() => {
+  const { username, password, isLoading, error, isLoggedIn, errorCount } = state;
+  useEffect(async() => {
     dispatch({ type: 'refresh' });
     return () =>{
       setClear(false)
@@ -70,6 +73,7 @@ export default function Login (props) {
   }, [clear])
 
   const reloadPage = async (e)=> {
+    console.log('state: ', state)
     e.preventDefault();
     // console.log('from login history: ',history)
     props.history.push({pathname:'/login',state:{ fromDashboard: true }})
@@ -86,21 +90,38 @@ export default function Login (props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: 'login' });
-    UserDataServices.verifyUser({username, password}).then(res => {
-      console.log('res.data: ', res.data)
+    if(errorCount > 3) {
       setTimeout(()=>{
+        dispatch({ type: 'refresh'} )
+      }, 30000)
+      return dispatch({ type: 'error', payload: 'Try again in 5 minutes' })
+    }
+    if(!username || !password ) {
+      setTimeout(()=>{
+        dispatch({ type: 'error', payload: 'Please fill all the fields!' } )
+      }, 50)
+    }
+    else {
+    UserDataServices.verifyUser({username, password}).then(res => {
+      // console.log('res.data: ', res.data)
+      if(!res.data) {
+        setTimeout(()=>{
+          dispatch({ type: 'error', payload: res.data.error })
+        }, 1550)
+      }
+      else {setTimeout(()=>{
         dispatch({ type: 'success' })
       }, 1550)
       props.login({userId:res.data._id})
-      props.history.push('/')
-      return res.data}).catch(err => dispatch({ type: 'error' },error))
+      props.history.push('/')}
+      return res.data}).catch(err => dispatch({ type: 'error', payload:'Connection Error. Try again later.'}))}
     };
 
   return (
     <div className='App'>
-      <div className='card p-3 text-right login-container'>
+      <div className='card p-5 text-right login-container'>
+      {state.error && <div className="alert alert-danger"><span className='form-control-danger' htmlFor ='input_error'>{state.error}</span></div>}
           <form className='submit-form' onSubmit={onSubmit}>
-            {error && <div className="error"><span className='alert alert-danger' htmlFor ='input_error'>{error}</span></div>}
             <p>Please Login!</p>
             <div className="form-group">
             <input
@@ -133,10 +154,12 @@ export default function Login (props) {
               }
             />
             </div>
+            <div className="container m-3">
             <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
-            <input className="pointer btn"  type="submit" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
+            <input className="pointer btn"  type="submit" disabled ={errorCount>3? true : false}onClick={reloadPage} value='click to refresh'/>
+            </div>
           </form>
       </div>
     </div>

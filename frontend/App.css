@@ -68,6 +68,7 @@
   white-space: nowrap;
 }
 .login-container {
+  width: 40%;
   margin: 0;
   position: absolute;
   top: 50%;
@@ -77,3 +78,26 @@
 .pointer {
   cursor: 'pointer';
 }
+#robort-check {
+  margin-right: 5%;
+  margin-left: 5%;
+  transform: translate(-5%);
+}
+#age {
+  position: flex;
+  float: left;
+  left: 5%;
+}
+
+a {
+  color: rgba(0, 0, 0, 0.55);
+} /* Unvisited link  */
+a:visited {
+  color: rgba(0, 0, 0, 0.55);
+} /* Visited link    */
+a:hover {
+  color: rgba(0, 0, 0, 0.55);
+} /* Mouse over link */
+a:active {
+  color: rgba(0, 0, 0, 0.55);
+} /* Selected link   */
