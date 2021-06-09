@@ -37,8 +37,19 @@
   }
 }
 
+#first-name {
+  float: left;
+  margin: 0;
+  width: 50%;
+  left: 2%;
+}
+#last-name {
+  float: right;
+  margin: 0;
+  width: 50%;
+  right: 2%;
+}
 .input {
-  width: 40%;
   margin: auto;
 }
 
@@ -67,6 +78,14 @@
   text-decoration: none;
   white-space: nowrap;
 }
+.signup-container {
+  width: 40%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .login-container {
   width: 30%;
   margin: 0;
@@ -79,15 +98,16 @@
   cursor: 'pointer';
 }
 #robort-check {
+  /* position: absolute; */
+  float: right;
   margin-right: 5%;
   margin-left: 5%;
   transform: translate(-5%);
 }
 #age {
   position: absolute;
-  position: flex;
   float: left;
-  left: 5%;
+  /* left: 5%; */
 }
 
 a {

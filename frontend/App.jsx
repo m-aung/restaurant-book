@@ -8,6 +8,7 @@ import Restaurant from "./components/restaurants";
 import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
 import Signup from "./components/signup"
+import NotFound from './components/404'
 
 // functional component App
 function App() {
@@ -47,8 +48,8 @@ function App() {
     <div> 
     <a className="navbar color title" href="/">{user ? user.username + '\'s\t' : ''} Restaurant Book 
     </a>
-    <nav className="color navbar navbar-expand-lg navbar-light" >
-    <button className="navbar-toggler" type="button" onClick={ toggleMenu}data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav className="color navbar navbar-expand-sm navbar-light" >
+    <button className="navbar-toggler" type="button" onClick={ toggleMenu }data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon "></span>
     </button>
     
@@ -116,7 +117,7 @@ function App() {
     </ul>
     </div>
     </nav>
-    
+    <Link to={{pathname:''}}></Link>
     <div className="container mt-3">
     
     <Switch>
@@ -126,21 +127,21 @@ function App() {
       {/* <Route path = {'/*'} render={(props)=>{
         <div>Error 404 not found</div>
       }}></Route> */}
-    <Route 
+    <Route exact
     path={`/restaurants/:id/review`}
     render={(props) => (
       <AddReview {...props} user={user} />
       )}
       />
       {/* restaurants route */}
-      <Route 
+      <Route exact
       path={`/restaurants/:id`}
       render={(props) => (
         <Restaurant {...props} user={user}/>
         )}
         />
         {/* login route */}
-        <Route 
+        <Route exact
         path={`/login`}
         render={(props) => (
           <Login 
@@ -149,12 +150,13 @@ function App() {
           refresh ={refresh}
           />
           )} />
-          <Route 
+          <Route exact
         path='/signup'//{`${url}/signup`}
         render={(props) => (
           <Signup {...props} signup={login} />
           )}
           />
+          <Route component={NotFound}/>
           </Switch>
           </div>
           </div>        
