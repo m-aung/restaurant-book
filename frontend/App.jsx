@@ -77,14 +77,16 @@ function App() {
      <span className="sr-only">Restaurants</span>
     </Link>
     </li>
-    <li className="nav-item">
     { user ? (
+      <li className="nav-item">
       <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
       Logout {user.name}
       </a>
+      </li>
       ) : (      
-        // login route
+        <li className="nav-item">
         <Link 
+        // login route
         to={{
           pathname: `/login`,
           // search: "?user=unknown",
@@ -95,9 +97,12 @@ function App() {
         activeopacity={0.8}>
         Login
         </Link>
+        </li>
         )}
-    </li>
-    <li className="nav-item">
+        { user ? (
+          <div></div>
+      ) : (      
+        <li className="nav-item">
       <Link to={{
         pathname:'/signup',
         // state: { fromDashboard: true }
@@ -107,6 +112,7 @@ function App() {
         signup
       </Link>
       </li>
+        )}
     </ul>
     </div>
     </nav>
@@ -114,7 +120,7 @@ function App() {
     <div className="container mt-3">
     
     <Switch>
-    <Route exact path = {[path,`/restaurants`]} /*{[`/`,`/restaurants`]}*/ render={(props) => (
+    <Route exact path = {[path,`/restaurants`,`/restaurants/`]} /*{[`/`,`/restaurants`]}*/ render={(props) => (
       <RestaurantsList {...props} />
       )} />
       {/* <Route path = {'/*'} render={(props)=>{
