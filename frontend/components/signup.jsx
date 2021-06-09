@@ -21,6 +21,7 @@ const initialState = {
 
 export default function Signup (props) {
 
+  const [clear,setClear] = useState(false)
   const [state,setState] = useState(initialState) // setting up state
   const { username, password, firstName, lastName, email, age, error, isLoggedIn , isLoading, robort} = state; // destructing
 
@@ -62,6 +63,22 @@ export default function Signup (props) {
         })
     }
     };
+
+    useEffect(() => {
+      setState(initialState)
+      return () =>{
+        setClear(false)
+      }
+    }, [clear])
+
+    const reloadPage = async (e)=> {
+      e.preventDefault();
+      // props.history.push({pathname:'/login',state:{ fromDashboard: true }})
+      setClear(true)
+      // console.log('state: ',state)
+      // console.log(props.history)
+
+    }
 
     const MAXDATE = (date) => {
       const now = new Date();
@@ -116,7 +133,7 @@ export default function Signup (props) {
               type='text'
               placeholder='Username'
               spellCheck= {false}
-              autoCapitalize = {false}
+              autoCapitalize = "username"
               value={username}
               onChange={(e) =>
                 setState({
@@ -160,6 +177,7 @@ export default function Signup (props) {
             <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
+            <input className="pointer btn" type="button" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
             </div>
           </form>
     </div>)}

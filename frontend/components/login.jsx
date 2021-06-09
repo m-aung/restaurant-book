@@ -1,8 +1,7 @@
-import React, { useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 // import login from '../reducers/login';
 import UserDataServices from '../services/users'
 import * as ACTION from '../action/types.js';
-import { BrowserHistory} from 'react-router';
 
 function loginReducer(state, action) {
   
@@ -43,6 +42,9 @@ function loginReducer(state, action) {
         isLoggedIn: false,
       };
     }
+    case 'refresh':{
+      return initialState
+    }
     default:
       return state;
   }
@@ -57,14 +59,24 @@ const initialState = {
 };
 
 export default function Login (props) {
-  const history = new BrowserHistory()
-  // props.updatePath('/login')
+  const [clear,setClear] = useState(false)
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const { username, password, isLoading, error, isLoggedIn } = state;
+  useEffect(() => {
+    dispatch({ type: 'refresh' });
+    return () =>{
+      setClear(false)
+    }
+  }, [clear])
+
   const reloadPage = async (e)=> {
     e.preventDefault();
-    console.log('from login history: ',history)
-    props.history.push('/')
+    // console.log('from login history: ',history)
+    props.history.push({pathname:'/login',state:{ fromDashboard: true }})
+    // props.refresh(initialState)
+    setClear(true)
+    console.log('state: ',state)
+    console.log(props.history)
     // history.go(0)
     // const curURI = document.baseURI
     // const documentURI = document.documentURI
@@ -124,7 +136,7 @@ export default function Login (props) {
             <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
-            <input className="btn" type="button" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
+            <input className="pointer btn"  type="submit" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
           </form>
       </div>
     </div>
