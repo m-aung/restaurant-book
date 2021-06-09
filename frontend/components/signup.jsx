@@ -93,15 +93,16 @@ export default function Signup (props) {
 
   return (
     <div className='App'>
-          <form className='card p-3 text-right login-container' onSubmit={onSubmit}>
+          <form className='card  text-right container-lg signup-container' onSubmit={onSubmit}>
             <span>  
               Sign up!<br/>
               It's easy.
             </span>
             {error && <div className="alert alert-danger"><span className='form-control-danger' htmlFor ='input_error'>{error}</span></div>}
-            <div className="form-group">
+            <div className="form-group container-lg ">
             <input
               className="input form-control"
+              id="first-name"
               type='text'
               placeholder='First Name'
               spellCheck= {false}
@@ -116,6 +117,7 @@ export default function Signup (props) {
             <input
               className="input form-control"
               type='text'
+              id="last-name"
               placeholder='Last Name'
               spellCheck= {false}
               value={lastName}
@@ -126,7 +128,6 @@ export default function Signup (props) {
                 })
               }
             />
-
             <input
               className="input form-control"
               type='text'
@@ -167,14 +168,14 @@ export default function Signup (props) {
                   })
                 }
               />
-            <div className="container m-3"> 
+            <div className="container lg"> 
             <Dropdown className="text-right btn btn-light dropdown" id="age" options={options} onChange={(e)=>{setState({...state, age:e['value'] })}} placeholder="Select an option" />
             </div>
-            <div className="container m-3">
+            <div className="container lg">
               <input type="checkbox" className="form-check-input" id="robort-check" onClick={(e)=> {setState({...state, robort:false,})}}/>
               <label className="label form-check-label" htmlFor="robort-check">click here to verify</label>
             </div>
-            <div className="container m-3">
+            <div className="container lg">
             <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
