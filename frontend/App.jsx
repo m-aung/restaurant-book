@@ -9,13 +9,16 @@ import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
 import Signup from "./components/signup"
 import NotFound from './components/404'
+// import {AccountCircleIcon} from '@material-ui/icons';
+import { BiUser, BiUserPlus, BiHomeAlt, BiLogOutCircle, BiLogInCircle, BiRestaurant} from 'react-icons/bi'
 
 // functional component App
 function App() {
   let {path, url} = useRouteMatch()
+
   // setting initial state using react hooks
   // const [path,setPath] = useState('/')
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({username: null, userId: null, token: null});
   const [navMenu, setNavMenu] = useState('');
   // fetch user information from database otherwise default is null
   const login = async(user = null) => {
@@ -25,13 +28,13 @@ function App() {
   
   // when logged out set user to null
   const logout = async ()=> {
-    setUser(null)
+    setUser({username: null, user_id: null})
   }
 
   const refresh = async (refreshState=null) => {
-    setUser(refreshState)
+    setUser({username: 'example', userId: 'd3891hkdu71234'})
   }
-  
+  console.log('user: ', user)
   const toggleMenu = () => {
     return navMenu === '' ? setNavMenu('show') : setNavMenu('')
   }
@@ -46,7 +49,7 @@ function App() {
     // creating nav-bar
     
     <div> 
-    <a className="navbar color title" href="/">{user ? user.username + '\'s\t' : ''} <center>Restaurant Book </center>
+    <a className="navbar color title" href={user.username? '': '/'}>{user.username ? `Welcome back ${user.username}`: 'Restaurant Book'} 
     </a>
     <nav className="color navbar navbar-expand-sm navbar-light" >
     <button className="navbar-toggler" type="button" onClick={ toggleMenu }data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,24 +67,25 @@ function App() {
       state: { fromDashboard: true }
     }} 
     activeopacity={0.8}
-    >{'Home'}
+    >Home<BiHomeAlt/>
     </Link>
     </li>
     <li className="nav-item">
     <Link to={{
-      pathname: `/restaurants`, //`${path}`,//`/restaurants`,
+      pathname: `/restaurants`, 
+      //`${path}`,//`/restaurants`,
       // state: { fromDashboard: true }
     }} 
       className="nav-link" 
       activeopacity={0.8}
     >
-     <span className="sr-only">Restaurants</span>
+     <span className="sr-only">Restaurants</span><BiRestaurant/>
     </Link>
     </li>
-    { user ? (
+    { user.username  ? (
       <li className="nav-item">
       <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
-      Logout {user.name}
+      Logout<BiLogOutCircle />
       </a>
       </li>
       ) : (      
@@ -96,11 +100,11 @@ function App() {
         }} 
         className="nav-link" 
         activeopacity={0.8}>
-        Login
+        Login<BiLogInCircle/>
         </Link>
         </li>
         )}
-        { user ? (
+        { user.username ? (
           <div></div>
       ) : (      
         <li className="nav-item">
@@ -110,7 +114,7 @@ function App() {
         }} 
         className='nav-link' 
         activeopacity={0.8}>
-        signup
+        Signup<BiUserPlus/>
       </Link>
       </li>
         )}
@@ -148,6 +152,7 @@ function App() {
           {...props}
           login={login}
           refresh ={refresh}
+          user={user}
           />
           )} />
           <Route exact
