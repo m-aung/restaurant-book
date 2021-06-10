@@ -46,7 +46,7 @@ function App() {
     // creating nav-bar
     
     <div> 
-    <a className="navbar color title" href="/">{user ? user.username + '\'s\t' : ''} Restaurant Book 
+    <a className="navbar color title" href="/">{user ? user.username + '\'s\t' : ''} <center>Restaurant Book </center>
     </a>
     <nav className="color navbar navbar-expand-sm navbar-light" >
     <button className="navbar-toggler" type="button" onClick={ toggleMenu }data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -46,7 +46,7 @@ export default function Signup (props) {
       setState({...state, isLoading:true, error:`Minimum 6 characters and must include at least one of the following: \n @,#,$,%,^,&,*, 0-9, a-z or A-Z`})
       setTimeout(()=> {
         setState({...state, isLoading:false})
-        // console.log('error from Timeout: ', error,'| Loading: ', isLoading)
+
       }, 2000)
       return
     } 
@@ -73,12 +73,8 @@ export default function Signup (props) {
 
     const reloadPage = async (e)=> {
       e.preventDefault();
-      // props.history.push({pathname:'/login',state:{ fromDashboard: true }})
       setClear(true)
-      // console.log('state: ',state)
-      // console.log(props.history)
-
-    }
+     }
 
     const MAXDATE = (date) => {
       const now = new Date();
@@ -92,16 +88,17 @@ export default function Signup (props) {
     ];
 
   return (
-    <div className='App'>
-          <form className='card  text-right container-lg signup-container' onSubmit={onSubmit}>
-            <span>  
+    <div className='app-grid'>
+      <div className="left-blank"/>
+          <form className='card p-1 container-md signup-container' onSubmit={onSubmit}>
+            <center>  
               Sign up!<br/>
               It's easy.
-            </span>
-            {error && <div className="alert alert-danger"><span className='form-control-danger' htmlFor ='input_error'>{error}</span></div>}
+            </center>
+            {error && <div className="alert alert-danger"><center className='form-control-danger' htmlFor ='input_error'>{error}</center></div>}
             <div className="form-group container-lg ">
             <input
-              className="input form-control"
+              className="input-signup form-control"
               id="first-name"
               type='text'
               placeholder='First Name'
@@ -115,7 +112,7 @@ export default function Signup (props) {
               }
             />
             <input
-              className="input form-control"
+              className="input-signup form-control"
               type='text'
               id="last-name"
               placeholder='Last Name'
@@ -129,7 +126,7 @@ export default function Signup (props) {
               }
             />
             <input
-              className="input form-control"
+              className="input-signup form-control"
               type='text'
               placeholder='Username'
               spellCheck= {false}
@@ -143,7 +140,7 @@ export default function Signup (props) {
               }
             />
             <input
-              className="input form-control"
+              className="input-signup form-control"
               type='email'
               placeholder='Email'
               spellCheck= {false}
@@ -156,7 +153,7 @@ export default function Signup (props) {
               }
             />
              <input
-                className="input form-control"
+                className="input-signup form-control"
                 type='password'
                 placeholder='New Password'
                 autoComplete='new-password'
@@ -168,19 +165,18 @@ export default function Signup (props) {
                   })
                 }
               />
-            <div className="container lg"> 
-            <Dropdown className="text-right btn btn-light dropdown" id="age" options={options} onChange={(e)=>{setState({...state, age:e['value'] })}} placeholder="Select an option" />
-            </div>
-            <div className="container lg">
-              <input type="checkbox" className="form-check-input" id="robort-check" onClick={(e)=> {setState({...state, robort:false,})}}/>
-              <label className="label form-check-label" htmlFor="robort-check">click here to verify</label>
-            </div>
-            <div className="container lg">
+            <Dropdown className="btn btn-light dropdown-toggle-split" options={options} onChange={(e)=>{setState({...state, age:e['value'] })}} placeholder="Select an option" />
+              <input type="checkbox" className="form-check-input robort-check" onClick={(e)=> {setState({...state, robort:false,})}}/>
+              <label className="label form-check-label robort-check" htmlFor="robort-check">click here to verify</label>
+            <div className="container">
+              <center>
             <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
             <input className="pointer btn" type="button" disabled={isLoading} onClick={reloadPage} value='click to refresh'/>
+            </center>
             </div>
             </div>
           </form>
+          <div className="right-blank"/>
     </div>)}

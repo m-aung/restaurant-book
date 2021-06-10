@@ -8,11 +8,22 @@ const RestaurantsList = props => {
   const [searchZip, setSearchZip ] = useState("");
   const [searchCuisine, setSearchCuisine ] = useState("");
   const [cuisines, setCuisines] = useState(["All Cuisines"]);
+  const [isClicked, setIsClicked] = useState(false)
 
   useEffect(() => {
     retrieveRestaurants();
     retrieveCuisines();
   }, []);
+
+  // useEffect(async () => {
+  //   console.log('Clicked: ',isClicked)
+  //     setTimeout(()=>{
+  //       console.log('Clicked: ',isClicked)
+  //     },1550)
+  //     return()=>{
+  //       setIsClicked(false)
+  //     }
+  // }, [searchCuisine,searchName,searchZip])
 
   const onChangeSearchName = e => {
     const searchName = e.target.value;
@@ -69,15 +80,30 @@ const RestaurantsList = props => {
       });
   };
 
-  const findByName = () => {
+  const findByName = async() => {
+    setIsClicked(true)
+    console.log(isClicked)
+    setTimeout(()=>{
+      setIsClicked(false)
+          },1550)
     find(searchName, "name")
   };
 
-  const findByZip = () => {
+  const findByZip = async () => {
+    setIsClicked(true)
+    console.log(isClicked)
+    setTimeout(()=>{
+      setIsClicked(false)
+          },1550)
     find(searchZip, "zipcode")
   };
 
-  const findByCuisine = () => {
+  const findByCuisine = async () => {
+    setIsClicked(true)
+    console.log(isClicked)
+    setTimeout(()=>{
+      setIsClicked(false)
+          },1550)
     if (searchCuisine == "All Cuisines") {
       refreshList();
     } else {
@@ -88,7 +114,7 @@ const RestaurantsList = props => {
   return (
     <div>
       <div className="row pb-1">
-        <div className="input-group col-lg-4">
+        <div className="input-group col-lg-4 p-1">
           <input
             type="text"
             className="form-control"
@@ -98,15 +124,17 @@ const RestaurantsList = props => {
           />
           <div className="input-group-append">
             <button
-              className="btn btn-outline-secondary"
+              className="btn button-color"
               type="button"
+              disabled={isClicked}
               onClick={findByName}
             >
-              Search
+              {isClicked ? 'Searching...' : 'Search'}
+              
             </button>
           </div>
         </div>
-        <div className="input-group col-lg-4">
+        <div className="input-group col-lg-4 p-1">
           <input
             type="text"
             className="form-control"
@@ -116,15 +144,16 @@ const RestaurantsList = props => {
           />
           <div className="input-group-append">
             <button
-              className="btn btn-outline-secondary"
+              className="btn button-color"
               type="button"
+              disabled={isClicked}
               onClick={findByZip}
             >
-              Search
+              {isClicked ? 'Searching...' : 'Search'}
             </button>
           </div>
         </div>
-        <div className="input-group col-lg-4">
+        <div className="input-group col-lg-4 p-1">
           <select onChange={onChangeSearchCuisine}>
              {cuisines.map(cuisine => {
                return (
@@ -134,11 +163,12 @@ const RestaurantsList = props => {
           </select>
           <div className="input-group-append">
             <button
-              className="btn btn-outline-secondary"
+              className="btn button-color"
               type="button"
+              disabled={isClicked}
               onClick={findByCuisine}
             >
-              Search
+              {isClicked ? 'Searching...' : 'Search'}
             </button>
           </div>
 

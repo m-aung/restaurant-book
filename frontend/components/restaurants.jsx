@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 
 const Restaurant = props => {
   const initialRestaurantState = {
-    id: null,
+    _id: null,
     name: "",
     address: {},
+    borough:'',
+    grades:[],
     cuisine: "",
     reviews: []
   };
@@ -15,15 +17,17 @@ const Restaurant = props => {
   const getRestaurant = id => {
     RestaurantDataService.get(id)
     .then(response => {
-      setRestaurant(response.data);
       console.log(response.data);
+      setRestaurant(response.data);
     })
     .catch(e => {
-      console.log(e);
+      // console.log(e);
+      console.log('from fetching reviews data')
     });
   };
   
   useEffect(() => {
+    console.log(props)
     getRestaurant(props.match.params.id);
   }, [props.match.params.id]);
   
