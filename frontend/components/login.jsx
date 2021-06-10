@@ -75,17 +75,13 @@ export default function Login (props) {
   const reloadPage = async (e)=> {
     console.log('state: ', state)
     e.preventDefault();
-    // console.log('from login history: ',history)
+
     props.history.push({pathname:'/login',state:{ fromDashboard: true }})
-    // props.refresh(initialState)
+
     setClear(true)
     console.log('state: ',state)
     console.log(props.history)
-    // history.go(0)
-    // const curURI = document.baseURI
-    // const documentURI = document.documentURI
-    // console.log(curURI, 'and: ', documentURI)
-    // location.replace(curURI);
+
   }
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -118,12 +114,14 @@ export default function Login (props) {
     };
 
   return (
-    <div className='App'>
-      <div className='card  text-right container-md login-container'>
-      {state.error && <div className="alert alert-danger"><span className='form-control-danger' htmlFor ='input_error'>{state.error}</span></div>}
-          <form className='submit-form' onSubmit={onSubmit}>
-            <p>Please Login!</p>
-            <div className="form-group">
+    <div className='app-grid'>
+      <div className="left-blank"/>
+          <form className='card p-1 container-md login-container' onSubmit={onSubmit}>
+            <center>
+              Please Login!
+            </center>
+          {state.error && <div className="alert alert-danger"><center className='form-control-danger' htmlFor ='input_error'>{state.error}</center></div>}
+            <div className="form-group container-lg">
             <input
               className="input-login form-control"
               type='text'
@@ -137,10 +135,8 @@ export default function Login (props) {
                 })
               }
             />
-            </div>
-            <div className="input-login form-group">
             <input
-              className="form-control"
+              className="input-login form-control"
               type='password'
               placeholder='password'
               autoComplete='new-password'
@@ -154,14 +150,16 @@ export default function Login (props) {
               }
             />
             </div>
-            <div className="container m-3">
+            <div className="container p-1">
+              <center>
             <button className="btn button-color" type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </button>
             <input className="pointer btn"  type="submit" disabled ={errorCount>3? true : false}onClick={reloadPage} value='click to refresh'/>
+            </center>
             </div>
           </form>
-      </div>
+      <div className="right-blank"/>
     </div>
   );
 }

@@ -37,6 +37,18 @@
   }
 }
 
+.app-grid {
+  display: grid;
+  grid-template-areas: 'grid1 grid1 grid2 grid3 grid3';
+}
+
+.left-blank {
+  grid-area: grid1;
+}
+.right-blank {
+  grid-area: grid3;
+}
+
 #first-name {
   float: left;
   margin: 0;
@@ -49,12 +61,11 @@
   width: 50%;
   right: 2%;
 }
-.input {
+.input-signup {
   margin: auto;
 }
 
 .input-login {
-  width: 40%;
   margin: auto;
 }
 .error {
@@ -69,6 +80,7 @@
 .button-color {
   background-color: #0aaefa;
 }
+
 .title {
   width: 100%;
   padding-top: 0.3125rem;
@@ -79,35 +91,23 @@
   white-space: nowrap;
 }
 .signup-container {
-  width: 40%;
-  margin: 0;
-  position: absolute;
+  grid-area: grid2;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -25%);
 }
 .login-container {
-  width: 30%;
-  margin: 0;
-  position: absolute;
+  grid-area: grid2;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -25%);
 }
 .pointer {
   cursor: 'pointer';
 }
-#robort-check {
-  /* position: absolute; */
+.robort-check {
   float: right;
-  margin-right: 5%;
-  margin-left: 5%;
-  transform: translate(-5%);
 }
 #age {
-  position: absolute;
   float: left;
-  /* left: 5%; */
 }
 
 a {
