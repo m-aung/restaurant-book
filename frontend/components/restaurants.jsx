@@ -70,7 +70,7 @@ const Restaurant = props => {
             <p className="card-text">
             {review.text}<br/>
             <strong>User: </strong>{review.name}<br/>
-            <strong>Date: </strong>{review.date}
+            <strong>Date: </strong>{review.date.slice(0, 10)}
             </p>
             {props.user && props.user.userId === review.user_id &&
               <div className="row">

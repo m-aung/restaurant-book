@@ -20,12 +20,15 @@
 // console.log(date5);
 // console.log(test);
 
-function testFunc(str) {
-  const arr = str.split('');
-  const regx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-  // return arr.split('').includes(`\ /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,20}$/g`);
-  console.log(regx.test(str));
-  return regx;
-}
+// function testFunc(str) {
+//   const arr = str.split('');
+//   const regx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+//   // return arr.split('').includes(`\ /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,20}$/g`);
+//   console.log(regx.test(str));
+//   return regx;
+// }
 
-console.log(testFunc('test1@Rtest'));
+// console.log(testFunc('test1@Rtest'));
+
+const dateString = '2021-06-10T18:47:34.152+00:00';
+console.log(dateString.slice(0, 10));
