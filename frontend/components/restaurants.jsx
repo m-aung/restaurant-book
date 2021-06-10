@@ -17,7 +17,7 @@ const Restaurant = props => {
   const getRestaurant = id => {
     RestaurantDataService.get(id)
     .then(response => {
-      console.log(response.data);
+      console.log('from getRestaurant: ',response.data);
       setRestaurant(response.data);
     })
     .catch(e => {
@@ -47,6 +47,7 @@ const Restaurant = props => {
   };
   
   return (
+    // <>{restaurant.revie}</>
     <div>
     {restaurant ? (
       <div>
@@ -71,7 +72,7 @@ const Restaurant = props => {
             <strong>User: </strong>{review.name}<br/>
             <strong>Date: </strong>{review.date}
             </p>
-            {props.user && props.user.id === review.user_id &&
+            {props.user && props.user.userId === review.user_id &&
               <div className="row">
               <a onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
               <Link to={{

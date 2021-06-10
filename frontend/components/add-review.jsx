@@ -19,11 +19,12 @@ const AddReview = props => {
     setReview(event.target.value);
   };
 
-  const saveReview = () => {
+  const saveReview = async () => {
+    
     var data = {
       text: review,
-      name: props.user.name,
-      user_id: props.user.id,
+      name: props.user.username,
+      user_id: props.user.userId,
       restaurant_id: props.match.params.id
     };
 
@@ -38,6 +39,7 @@ const AddReview = props => {
           console.log(e);
         });
     } else {
+      console.log(data)
       RestaurantDataService.createReview(data)
         .then(response => {
           setSubmitted(true);
@@ -75,7 +77,7 @@ const AddReview = props => {
                 name="text"
               />
             </div>
-            <button onClick={saveReview} className="btn btn-success">
+            <button onClick={saveReview} disabled={isLoading}className="btn btn-success">
               Submit
             </button>
           </div>
