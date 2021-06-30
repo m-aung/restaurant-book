@@ -122,3 +122,15 @@ a:hover {
 a:active {
   color: rgba(0, 0, 0, 0.55);
 }
+
+.logo-picture {
+  max-width: 100px;
+  margin-left: -1em;
+  margin-top: -1em;
+  margin-bottom: -1.5em;
+  transform: scale(0.8);
+}
+.logo-text {
+  margin: 0 auto;
+  cursor: default;
+}

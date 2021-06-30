@@ -49,13 +49,14 @@ function App() {
     // creating nav-bar
     
     <div> 
-    <a className="navbar color title" href={user.username? '': '/'}>{user.username ? `Welcome back ${user.username}`: 'Restaurant Book'} 
-    </a>
+      <div className="navbar color title">
+    <a href={user.username ? '': '/'}><img src ="/img/apple-touch-icon.png" className="navbar color title logo-picture" alt="Logo picture"/></a>
+    </div>
     <nav className="color navbar navbar-expand-sm navbar-light" >
-    <button className="navbar-toggler" type="button" onClick={ toggleMenu }data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button className="navbar-toggler" type="button" onClick={ toggleMenu } data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon "></span>
     </button>
-    
+    <div>{user.username ? 'Restaurant Book' : `${user.username}'s Restaurant Book`}</div>
     <div className={"collapse navbar-collapse " + navMenu }id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
       <li className="nav-item">
