@@ -1,3 +1,6 @@
+.body {
+  background-color: black;
+}
 .App {
   text-align: center;
 }
@@ -23,9 +26,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.main-display {
+  background: rgb(139, 0, 109);
+}
 
 .App-link {
-  color: #61dafb;
+  color: black;
 }
 
 @keyframes App-logo-spin {
@@ -74,11 +80,11 @@
 .label {
   margin-left: -1rem;
 }
-.color {
-  background-color: #e3f2fd;
+.nav-color {
+  background-color: rgb(248, 247, 181);
 }
 .button-color {
-  background-color: #0aaefa;
+  background-color: #da5bc4;
 }
 
 .title {

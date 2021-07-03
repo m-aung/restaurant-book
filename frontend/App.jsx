@@ -49,16 +49,16 @@ function App() {
     // creating nav-bar
     
     <div> 
-      <div className="navbar color title">
+      <div className="navbar nav-color title">
     <a href={user.username ? '': '/'}><img src ="/img/apple-touch-icon.png" className="navbar color title logo-picture" alt="Logo picture"/></a>
     </div>
-    <nav className="color navbar navbar-expand-sm navbar-light" >
+    <nav className="nav-color navbar navbar-expand-sm navbar-light" >
     <button className="navbar-toggler" type="button" onClick={ toggleMenu } data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon "></span>
     </button>
-    <div>{user.username ? 'Restaurant Book' : `${user.username}'s Restaurant Book`}</div>
-    <div className={"collapse navbar-collapse " + navMenu }id="navbarSupportedContent">
-    <ul className="navbar-nav mr-auto">
+    <div >{user.username ? `${user.username}'s Restaurant Book` : ''}</div>
+    <div className={"collapse navbar-collapse nav-color" + navMenu } id="navbarSupportedContent">
+    <ul className="navbar-nav mr-auto ">
       <li className="nav-item">
     <Link className="nav-link" 
     to={{
@@ -123,7 +123,7 @@ function App() {
     </div>
     </nav>
     <Link to={{pathname:''}}></Link>
-    <div className="container mt-3">
+    <div className="container mt-3 main-display">
     
     <Switch>
     <Route exact path = {[path,`/restaurants`,`/restaurants/`]} /*{[`/`,`/restaurants`]}*/ render={(props) => (
