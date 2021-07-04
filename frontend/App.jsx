@@ -10,8 +10,8 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Home from './components/home'
 import NotFound from './components/404';
-import './img/apple-touch-icon.png'
-import './img/restaurant_img-612x612.jpg'
+import logo from './img/apple-touch-icon.png'
+
 // import {AccountCircleIcon} from '@material-ui/icons';
 import { BiUserPlus, BiHomeAlt, BiLogOutCircle, BiLogInCircle, BiRestaurant} from 'react-icons/bi'
 
@@ -53,7 +53,7 @@ const App = () => {
     
     <div className="main-content"> 
       <div className="navbar nav-color title">
-    <a href={user.username ? '': '/'}><img src ="/img/apple-touch-icon.png" className="navbar color title logo-picture" alt="Logo picture"/></a>
+    <a href={user.username ? '': '/'}><img src ={logo} className="navbar color title logo-picture" alt="Logo picture"/></a>
     </div>
     <nav className="nav-color navbar navbar-expand-sm navbar-light" >
     <button className="navbar-toggler" type="button" onClick={ toggleMenu } data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

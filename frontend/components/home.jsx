@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { render } from "react-dom";
+import picture from '../img/pic-612x612.jpg'
 
 const Home = (props) => {
   return(
     <div className="main-display">
       <section className="home-container ">
         <h3>Welcome to Restaurant Book</h3>
-      <img className ="img" src="../img/restaurant_img-612x612.jpg"></img>
+      <img className ="img" src={picture}></img>
       </section>
     </div>
   )
