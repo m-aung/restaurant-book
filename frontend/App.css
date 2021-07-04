@@ -191,7 +191,7 @@ a:active {
 }
 .card-modify {
   /* max-width: 290px; */
-  background-color: var(--clr-theme-dark);
+  background-color: var(--clr-theme-light);
   height: 250px;
   /* justify-content: center; */
   /* align-items: flex-start; */

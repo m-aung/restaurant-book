@@ -10,6 +10,8 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Home from './components/home'
 import NotFound from './components/404';
+import './img/apple-touch-icon.png'
+import './img/restaurant_img-612x612.jpg'
 // import {AccountCircleIcon} from '@material-ui/icons';
 import { BiUserPlus, BiHomeAlt, BiLogOutCircle, BiLogInCircle, BiRestaurant} from 'react-icons/bi'
 
