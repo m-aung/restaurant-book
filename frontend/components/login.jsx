@@ -74,22 +74,22 @@ export default function Login (props) {
   }, [clear])
 
   const reloadPage = async (e)=> {
-    console.log('state: ', state)
+    // console.log('state: ', state)
     e.preventDefault();
 
     props.history.push({pathname:'/login',state:{ fromDashboard: true }})
 
     setClear(true)
-    console.log('state: ',state)
-    console.log(props.history)
+    // console.log('state: ',state)
+    // console.log(props.history)
 
   }
   const onSubmit = async (e) => {
     e.preventDefault();
     // testing
-    if(username.includes('test')&& password === 't'){
+    if(username.includes('test') && password === 't'){
       props.login({...props.user,'userId':'userid2222', 'username': username})
-      console.log('username: ',props.user)
+      // console.log('username: ',props.user)
       return props.history.push('/')
     }
     dispatch({ type: 'login' });
@@ -107,6 +107,9 @@ export default function Login (props) {
     else {
     UserDataServices.verifyUser({username, password}).then(res => {
       // console.log('res.data: ', res.data)
+      // console.log('username: ', username)
+      // console.log('password: ',)
+      // console.log('from verifyuser', res.data)
       if(!res.data.user_id) {
         setTimeout(()=>{
           dispatch({ type: 'error', count: 1, payload: res.data.error })
@@ -115,11 +118,16 @@ export default function Login (props) {
       else {setTimeout(()=>{
         dispatch({ type: 'success' })
       }, 1550)
-      console.log('from setTimeout 2, res.data:',res.data)
+      // console.log('after setTimeout 2, res.data:',res.data)
       props.login({...props.user,'userId':res.data.user_id, 'username': username})
-      console.log('username: ',props.user)
+      // console.log('username: ',props.user)
       props.history.push('/')}
-      return res.data}).catch(err => dispatch({ type: 'error', count: 1, payload:'Connection Error. Try again later.'}))}
+      return res.data}).catch(err => 
+        {
+          // console.log('err: ', err)
+          dispatch({ type: 'error', count: 1, payload:'Connection Error. Try again later.'})
+        }
+        )}
     };
 
   return (

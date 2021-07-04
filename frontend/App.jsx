@@ -48,7 +48,7 @@ function App() {
   return (
     // creating nav-bar
     
-    <div> 
+    <div className="main-content"> 
       <div className="navbar nav-color title">
     <a href={user.username ? '': '/'}><img src ="/img/apple-touch-icon.png" className="navbar color title logo-picture" alt="Logo picture"/></a>
     </div>
@@ -60,7 +60,7 @@ function App() {
     <div className={"collapse navbar-collapse nav-color" + navMenu } id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto ">
       <li className="nav-item">
-    <Link className="nav-link" 
+    <Link className="nav-link nav-color" 
     to={{
       pathname:`/`,
       // search: "?sort=name",

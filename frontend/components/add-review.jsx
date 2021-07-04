@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const AddReview = props => {
   let initialReviewState = ""
-
+  const [isLoading, setIsLoading] = useState(false)
   let editing = false;
 
   if (props.location.state && props.location.state.currentReview) {
@@ -20,7 +20,6 @@ const AddReview = props => {
   };
 
   const saveReview = async () => {
-    
     var data = {
       text: review,
       name: props.user.username,
@@ -46,6 +45,7 @@ const AddReview = props => {
           console.log(response.data);
         })
         .catch(e => {
+          setIsLoading(true)
           console.log(e);
         });
     }
