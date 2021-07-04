@@ -1,3 +1,29 @@
+:root {
+  --ff-primary: 'Source Sans Pro', sans-serif;
+  --ff-secondary: 'Source Code Pro', monospace;
+
+  --fw-reg: 300;
+  --fw-bold: 900;
+
+  --clr-secondary-light: rgb(236, 119, 174);
+  --clr-secondary-dark: rgb(211, 27, 113);
+  --clr-primary-light: rgb(234, 251, 238);
+  --clr-primary-dark: #2d333b;
+  --clr-theme: #1685e0;
+  --clr-theme-light: #16e082;
+  --clr-theme-dark: #16e082;
+  --cl-text-light: aliceblue;
+  --cl-text-dark: #7bb9ec;
+
+  --fs-h1: 3rem;
+  --fs-h2: 2.25rem;
+  --fs-h3: 1.25rem;
+  --fs-body: 1rem;
+
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.35),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+}
+
 .App {
   text-align: center;
 }
@@ -21,11 +47,16 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(255, 255, 255);
 }
-
+.main-display {
+  background: #444c56;
+}
+.main-content {
+  background-color: #444c56;
+}
 .App-link {
-  color: #61dafb;
+  color: white;
 }
 
 @keyframes App-logo-spin {
@@ -74,11 +105,13 @@
 .label {
   margin-left: -1rem;
 }
-.color {
-  background-color: #e3f2fd;
+.nav-color {
+  background-color: var(--clr-primary-dark);
+  color: aliceblue;
 }
 .button-color {
-  background-color: #0aaefa;
+  background-color: var(--clr-secondary-dark);
+  color: white;
 }
 
 .title {
@@ -90,6 +123,7 @@
   text-decoration: none;
   white-space: nowrap;
 }
+
 .signup-container {
   grid-area: grid2;
   top: 50%;
@@ -110,15 +144,34 @@
   float: left;
 }
 
-a {
-  color: rgba(0, 0, 0, 0.55);
+.navbar-light .navbar-nav .nav-link {
+  color: aliceblue;
 }
-a:visited {
-  color: rgba(0, 0, 0, 0.55);
+
+.navbar-light .navbar-nav .nav-link:visited {
+  color: aliceblue;
 }
-a:hover {
-  color: rgba(0, 0, 0, 0.55);
+.navbar-light .navbar-nav .nav-link:hover {
+  color: rgb(236, 119, 174);
 }
 a:active {
-  color: rgba(0, 0, 0, 0.55);
+  color: whitesmoke;
+}
+
+.logo-picture {
+  max-width: 100px;
+  margin-left: -1em;
+  margin-top: -1em;
+  margin-bottom: -1.5em;
+  transform: scale(0.8);
+}
+.logo-text {
+  margin: 0 auto;
+  cursor: default;
+}
+.card {
+  /* max-width: 290px; */
+  height: 250px;
+  justify-content: center;
+  /* align-items: flex-start; */
 }

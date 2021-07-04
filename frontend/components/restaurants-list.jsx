@@ -180,17 +180,17 @@ const RestaurantsList = props => {
           return (
             <div className="col-lg-4 pb-2" key={index}>
               <div  className="card">
-                <div className="card-body">
+                <div className="card-body card">
                   <h5 className="card-title">{restaurant.name}</h5>
                   <p className="card-text">
                     <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
                     <strong>Address: </strong>{address}
                   </p>
                   <div className="row">
-                  <Link to={"/restaurants/"+restaurant._id} className="btn btn-primary col-lg-5 mx-1 mb-1">
+                  <Link to={"/restaurants/"+restaurant._id} className="btn btn-primary col-lg-5 mx-1 mb-1 button-color">
                     View Reviews
                   </Link>
-                  <a target="_blank" href={"https://www.google.com/maps/place/" + address} className="btn btn-primary col-lg-5 mx-1 mb-1">View Map</a>
+                  <a target="_blank" href={"https://www.google.com/maps/place/" + address} className="btn btn-primary col-lg-5 mx-1 mb-1 button-color">View Map</a>
                   </div>
                 </div>
               </div>
