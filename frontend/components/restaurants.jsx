@@ -48,7 +48,7 @@ const Restaurant = props => {
   
   return (
     // <>{restaurant.revie}</>
-    <div>
+    <div className="dark-theme">
     {restaurant ? (
       <div>
       <h5>{restaurant.name}</h5>
@@ -56,7 +56,7 @@ const Restaurant = props => {
       <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
       <strong>Address: </strong>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.zipcode}
       </p>
-      <Link to={"/restaurants/" + props.match.params.id + "/review"} className="btn btn-primary">
+      <Link to={"/restaurants/" + props.match.params.id + "/review"} className="btn btn-primary button-color">
       Add Review
       </Link>
       <h4> Reviews </h4>
@@ -64,7 +64,7 @@ const Restaurant = props => {
       {restaurant.reviews.length > 0 ? (
         restaurant.reviews.map((review, index) => {
           return (
-            <div className="col-lg-4 pb-3" key={index}>
+            <div className="col-lg-4 pb-3">
             <div className="card">
             <div className="card-body">
             <p className="card-text">
@@ -74,7 +74,7 @@ const Restaurant = props => {
             </p>
             {props.user && props.user.userId === review.user_id &&
               <div className="row">
-              <a onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
+              <a onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1 button-color">Delete</a>
               <Link to={{
                 pathname: "/restaurants/" + props.match.params.id + "/review",
                 state: {

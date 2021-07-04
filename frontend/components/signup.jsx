@@ -92,7 +92,7 @@ export default function Signup (props) {
       <div className="left-blank"/>
           <form className='card p-1 container-md signup-container' onSubmit={onSubmit}>
             <center>  
-              Sign up!<br/>
+              <h3>Sign up!</h3>
               It's easy.
             </center>
             {error && <div className="alert alert-danger"><center className='form-control-danger' htmlFor ='input_error'>{error}</center></div>}

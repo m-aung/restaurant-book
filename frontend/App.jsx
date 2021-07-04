@@ -7,13 +7,14 @@ import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants";
 import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
-import Signup from "./components/signup"
-import NotFound from './components/404'
+import Signup from "./components/signup";
+import Home from './components/home'
+import NotFound from './components/404';
 // import {AccountCircleIcon} from '@material-ui/icons';
-import { BiUser, BiUserPlus, BiHomeAlt, BiLogOutCircle, BiLogInCircle, BiRestaurant} from 'react-icons/bi'
+import { BiUserPlus, BiHomeAlt, BiLogOutCircle, BiLogInCircle, BiRestaurant} from 'react-icons/bi'
 
 // functional component App
-function App() {
+const App = () => {
   let {path, url} = useRouteMatch()
 
   // setting initial state using react hooks
@@ -34,7 +35,7 @@ function App() {
   const refresh = async (refreshState=null) => {
     setUser({username: 'example', userId: 'd3891hkdu71234'})
   }
-  console.log('user: ', user)
+  // console.log('user: ', user)
   const toggleMenu = () => {
     return navMenu === '' ? setNavMenu('show') : setNavMenu('')
   }
@@ -57,7 +58,7 @@ function App() {
     <span className="navbar-toggler-icon "></span>
     </button>
     <div >{user.username ? `${user.username}'s Restaurant Book` : ''}</div>
-    <div className={"collapse navbar-collapse nav-color" + navMenu } id="navbarSupportedContent">
+    <div className={"collapse navbar-collapse nav-color " + navMenu } id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto ">
       <li className="nav-item">
     <Link className="nav-link nav-color" 
@@ -122,11 +123,12 @@ function App() {
     </ul>
     </div>
     </nav>
-    <Link to={{pathname:''}}></Link>
+    {/* <Link to={{pathname:''}}></Link> */}
     <div className="container mt-3 main-display">
     
     <Switch>
-    <Route exact path = {[path,`/restaurants`,`/restaurants/`]} /*{[`/`,`/restaurants`]}*/ render={(props) => (
+      <Route exact path ={'/'} component={Home}/>
+    <Route exact path = {[path,`/restaurants`]} /*{[`/`,`/restaurants`]}*/ render={(props) => (
       <RestaurantsList {...props} />
       )} />
       {/* <Route path = {'/*'} render={(props)=>{

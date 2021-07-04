@@ -135,7 +135,7 @@ export default function Login (props) {
       <div className="left-blank"/>
           <form className='card p-1 container-md login-container' onSubmit={onSubmit}>
             <center>
-              Please Login!
+              <h3>Login!</h3>
             </center>
           {state.error && <div className="alert alert-danger"><center className='form-control-danger' htmlFor ='input_error'>{state.error}</center></div>}
             <div className="form-group container-lg">

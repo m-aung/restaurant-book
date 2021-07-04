@@ -32,21 +32,21 @@ const AddReview = props => {
       RestaurantDataService.updateReview(data)
         .then(response => {
           setSubmitted(true);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch(e => {
-          console.log(e);
+          // console.log(e);
         });
     } else {
       console.log(data)
       RestaurantDataService.createReview(data)
         .then(response => {
           setSubmitted(true);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch(e => {
           setIsLoading(true)
-          console.log(e);
+          // console.log(e);
         });
     }
 
@@ -55,7 +55,7 @@ const AddReview = props => {
   return (
     <div>
       {props.user ? (
-      <div className="submit-form">
+      <div className="submit-form dark-theme">
         {submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
@@ -77,7 +77,7 @@ const AddReview = props => {
                 name="text"
               />
             </div>
-            <button onClick={saveReview} disabled={isLoading}className="btn btn-success">
+            <button onClick={saveReview} disabled={isLoading} className="btn button-color">
               Submit
             </button>
           </div>
@@ -85,7 +85,7 @@ const AddReview = props => {
       </div>
 
       ) : (
-      <div>
+      <div className="dark-theme">
         Please log in.
       </div>
       )}
