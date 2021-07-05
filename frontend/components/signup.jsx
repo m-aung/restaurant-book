@@ -90,7 +90,7 @@ export default function Signup (props) {
   return (
     <div className='app-grid'>
       <div className="left-blank"/>
-          <form className='card p-1 container-md signup-container' onSubmit={onSubmit}>
+          <form className='p-1 container-md signup-container' onSubmit={onSubmit}>
             <center>  
               <h3>Sign up!</h3>
               It's easy.
@@ -165,7 +165,8 @@ export default function Signup (props) {
                   })
                 }
               />
-            <Dropdown className="btn btn-light dropdown-toggle-split" options={options} onChange={(e)=>{setState({...state, age:e['value'] })}} placeholder="Select an option" />
+            <Dropdown className="btn btn-light dropdown-toggle-split" options={options} onChange={(e)=>{
+              setState({...state, age:e['value'] })}} placeholder="Select an option" />
               <input type="checkbox" className="form-check-input robort-check" onClick={(e)=> {setState({...state, robort:false,})}}/>
               <label className="label form-check-label robort-check" htmlFor="robort-check">click here to verify</label>
             <div className="container">
