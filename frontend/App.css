@@ -193,6 +193,7 @@ a:active {
   /* max-width: 290px; */
   background-color: var(--clr-theme-light);
   height: 250px;
+  color: var(--clr-text-light);
   /* justify-content: center; */
   /* align-items: flex-start; */
 }
