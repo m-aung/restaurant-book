@@ -138,13 +138,13 @@ body {
 .signup-container {
   background-color: var(--clr-theme-light);
   grid-area: grid2;
-  top: 50%;
+  margin-top: 20%;
   color: var(--clr-text-light);
 }
 .login-container {
   background-color: var(--clr-theme-light);
   grid-area: grid2;
-  margin-top: 50%;
+  margin-top: 40%;
   color: var(--clr-text-light);
 }
 .home-container {
