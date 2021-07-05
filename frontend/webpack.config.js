@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
   // the output bundle won't be optimized for production but suitable for development
@@ -49,7 +50,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'index.html'),
-      favicon: path.resolve(__dirname, 'favicon.ico'),
+      // favicon: path.resolve(__dirname, 'favicon.ico'),
     }),
+    new FaviconsWebpackPlugin('./favicon.ico'),
   ],
 };
